@@ -6,11 +6,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="images")
+ * @ORM\Table(name="image")
  *  **/
 
 
-class Images
+class Image
 {
     /** 
      * @ORM\Column(type="integer")
@@ -36,10 +36,12 @@ class Images
 
    /**
      * Many Images have One Game.
-     * @ORM\ManyToOne(targetEntity="Game", inversedBy="images")
+     * @ORM\ManyToOne(targetEntity="Game", inversedBy="image")
      * @ORM\JoinColumn(name="gameId", referencedColumnName="id")
      */
     protected $game;    
+
+    
 
     /**
      * Get id
@@ -56,7 +58,7 @@ class Images
      *
      * @param string $imgFileName
      *
-     * @return Images
+     * @return Image
      */
     public function setImgFileName($imgFileName)
     {
@@ -80,7 +82,7 @@ class Images
      *
      * @param string $description
      *
-     * @return Images
+     * @return Image
      */
     public function setDescription($description)
     {
@@ -104,7 +106,7 @@ class Images
      *
      * @param integer $gameId
      *
-     * @return Images
+     * @return Image
      */
     public function setGameId($gameId)
     {
@@ -128,7 +130,7 @@ class Images
      *
      * @param \AppBundle\Entity\Game $game
      *
-     * @return Images
+     * @return Image
      */
     public function setGame(\AppBundle\Entity\Game $game = null)
     {

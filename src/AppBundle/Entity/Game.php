@@ -51,14 +51,13 @@ class Game
     
     /**
      * One Game have Many Images.
-     * @ORM\OneToMany(targetEntity="Images", mappedBy="game")
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="game")
      **/
     private $images;
     
      public function __construct() {
         $this->images = new ArrayCollection();
     }
-    
 
     /**
      * Get id
@@ -217,11 +216,11 @@ class Game
     /**
      * Add image
      *
-     * @param \AppBundle\Entity\Images $image
+     * @param \AppBundle\Entity\Image $image
      *
      * @return Game
      */
-    public function addImage(\AppBundle\Entity\Images $image)
+    public function addImage(\AppBundle\Entity\Image $image)
     {
         $this->images[] = $image;
 
@@ -231,9 +230,9 @@ class Game
     /**
      * Remove image
      *
-     * @param \AppBundle\Entity\Images $image
+     * @param \AppBundle\Entity\Image $image
      */
-    public function removeImage(\AppBundle\Entity\Images $image)
+    public function removeImage(\AppBundle\Entity\Image $image)
     {
         $this->images->removeElement($image);
     }
