@@ -28,20 +28,6 @@ class Image
      *  @ORM\Column(type="text")
      **/
     protected $description;
-    
-    /**
-     *  @ORM\Column(type="integer")
-     **/
-   protected $gameId;
-
-   /**
-     * Many Images have One Game.
-     * @ORM\ManyToOne(targetEntity="Game", inversedBy="image")
-     * @ORM\JoinColumn(name="gameId", referencedColumnName="id")
-     */
-    protected $game;    
-
-    
 
     /**
      * Get id
@@ -99,53 +85,5 @@ class Image
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Set gameId
-     *
-     * @param integer $gameId
-     *
-     * @return Image
-     */
-    public function setGameId($gameId)
-    {
-        $this->gameId = $gameId;
-
-        return $this;
-    }
-
-    /**
-     * Get gameId
-     *
-     * @return integer
-     */
-    public function getGameId()
-    {
-        return $this->gameId;
-    }
-
-    /**
-     * Set game
-     *
-     * @param \AppBundle\Entity\Game $game
-     *
-     * @return Image
-     */
-    public function setGame(\AppBundle\Entity\Game $game = null)
-    {
-        $this->game = $game;
-
-        return $this;
-    }
-
-    /**
-     * Get game
-     *
-     * @return \AppBundle\Entity\Game
-     */
-    public function getGame()
-    {
-        return $this->game;
     }
 }

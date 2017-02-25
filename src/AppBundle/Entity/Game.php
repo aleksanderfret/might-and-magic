@@ -50,8 +50,11 @@ class Game
     protected $modDate;
     
     /**
-     * One Game have Many Images.
-     * @ORM\OneToMany(targetEntity="Image", mappedBy="game")
+     *  @ORM\ManyToMany(targetEntity="Image")
+     *  @ORM\JoinTable(name="game_image",
+     *      joinColumns={ @ORM\JoinColumn(name="gameId", referencedColumnName="id")},
+     *      inverseJoinColumns={ @ORM\JoinColumn(name="imageId", referencedColumnName="id", unique=true)}
+     *      )
      **/
     private $images;
     
