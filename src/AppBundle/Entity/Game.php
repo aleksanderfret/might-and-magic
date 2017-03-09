@@ -7,59 +7,96 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="game")
- **/
-
+ * @ORM\Table(name="game", indexes={@ORM\Index(name="idx_game_editionId", columns={"edition_id"})})
+ */
 class Game
 {
     /** 
-     * @ORM\Column(type="integer")
      * @ORM\Id
+     * @ORM\Column(type="integer") 
      * @ORM\GeneratedValue(strategy="AUTO")
-    **/
+     */
     protected $id;
 
     /**
-     *  @ORM\Column(type="string", unique=true, length=100)
-     **/
+     *  @ORM\Column(type="string", length=100)
+     */
     protected $gameTitle;
 
     /**
-     *  @ORM\Column(type="text")
-     **/
+     *  @ORM\Column(type="text", nullable=true)
+     */
     protected $description;
     
     /**
-     *  @ORM\Column(type="text")
-     **/
+     *  @ORM\Column(type="text", nullable=true)
+     */
     protected $note;    
     
     /**
-     *  @ORM\Column(type="date")
-     **/
+     *  @ORM\Column(type="datetime")
+     */
     protected $createDate;
     
     /**
-     *  @ORM\Column(type="date")
-     **/
+     *  @ORM\Column(type="datetime")
+     */
     protected $addDate;
     
     /**
-     *  @ORM\Column(type="date")
-     **/
+     *  @ORM\Column(type="datetime")
+     */
     protected $modDate;
     
     /**
-     *  @ORM\ManyToMany(targetEntity="Image")
-     *  @ORM\JoinTable(name="game_image",
-     *      joinColumns={ @ORM\JoinColumn(name="gameId", referencedColumnName="id")},
-     *      inverseJoinColumns={ @ORM\JoinColumn(name="imageId", referencedColumnName="id", unique=true)}
-     *      )
-     **/
-    private $images;
+     *  @ORM\Column(type="string", length=255)
+     */
+    protected $download;
     
-     public function __construct() {
-        $this->images = new ArrayCollection();
+    /**
+     *  @ORM\ManyToMany(targetEntity="Image", mappedBy="game")
+     */
+    protected $image;
+    
+    /**     
+     * @ORM\OneToMany(targetEntity="Element", mappedBy="game")
+     */
+    protected $element;
+    
+    /**     
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="game")
+     */
+    protected $comment;
+    
+    /**     
+     * @ORM\OneToMany(targetEntity="GameAuthorWork", mappedBy="game")
+     */
+    protected $gameAuthorWork;
+    
+    /**     
+     * @ORM\OneToMany(targetEntity="GameUserNews", mappedBy="game")
+     */
+    protected $gameUserNews;
+    
+    /**     
+     * @ORM\OneToMany(targetEntity="GameUserRate", mappedBy="game")
+     */
+    protected $gameUserRate;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Edition", inversedBy="game")
+     * @ORM\JoinColumn(name="edition_id", referencedColumnName="id", nullable=false)
+     */
+    protected $edition;
+    
+    public function __construct()
+    {
+        $this->image = new ArrayCollection();
+        $this->element = new ArrayCollection();
+        $this->comment = new ArrayCollection();
+        $this->gameAuthorWork = new ArrayCollection();
+        $this->gameUserNews = new ArrayCollection();
+        $this->gameUserRate = new ArrayCollection();
     }
 
     /**
@@ -217,6 +254,30 @@ class Game
     }
 
     /**
+     * Set download
+     *
+     * @param string $download
+     *
+     * @return Game
+     */
+    public function setDownload($download)
+    {
+        $this->download = $download;
+
+        return $this;
+    }
+
+    /**
+     * Get download
+     *
+     * @return string
+     */
+    public function getDownload()
+    {
+        return $this->download;
+    }
+
+    /**
      * Add image
      *
      * @param \AppBundle\Entity\Image $image
@@ -225,7 +286,7 @@ class Game
      */
     public function addImage(\AppBundle\Entity\Image $image)
     {
-        $this->images[] = $image;
+        $this->image[] = $image;
 
         return $this;
     }
@@ -237,16 +298,210 @@ class Game
      */
     public function removeImage(\AppBundle\Entity\Image $image)
     {
-        $this->images->removeElement($image);
+        $this->image->removeElement($image);
     }
 
     /**
-     * Get images
+     * Get image
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getImages()
+    public function getImage()
     {
-        return $this->images;
+        return $this->image;
+    }
+
+    /**
+     * Add element
+     *
+     * @param \AppBundle\Entity\Element $element
+     *
+     * @return Game
+     */
+    public function addElement(\AppBundle\Entity\Element $element)
+    {
+        $this->element[] = $element;
+
+        return $this;
+    }
+
+    /**
+     * Remove element
+     *
+     * @param \AppBundle\Entity\Element $element
+     */
+    public function removeElement(\AppBundle\Entity\Element $element)
+    {
+        $this->element->removeElement($element);
+    }
+
+    /**
+     * Get element
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getElement()
+    {
+        return $this->element;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     *
+     * @return Game
+     */
+    public function addComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comment[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     */
+    public function removeComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comment->removeElement($comment);
+    }
+
+    /**
+     * Get comment
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Add gameAuthorWork
+     *
+     * @param \AppBundle\Entity\GameAuthorWork $gameAuthorWork
+     *
+     * @return Game
+     */
+    public function addGameAuthorWork(\AppBundle\Entity\GameAuthorWork $gameAuthorWork)
+    {
+        $this->gameAuthorWork[] = $gameAuthorWork;
+
+        return $this;
+    }
+
+    /**
+     * Remove gameAuthorWork
+     *
+     * @param \AppBundle\Entity\GameAuthorWork $gameAuthorWork
+     */
+    public function removeGameAuthorWork(\AppBundle\Entity\GameAuthorWork $gameAuthorWork)
+    {
+        $this->gameAuthorWork->removeElement($gameAuthorWork);
+    }
+
+    /**
+     * Get gameAuthorWork
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGameAuthorWork()
+    {
+        return $this->gameAuthorWork;
+    }
+
+    /**
+     * Add gameUserNews
+     *
+     * @param \AppBundle\Entity\GameUserNews $gameUserNews
+     *
+     * @return Game
+     */
+    public function addGameUserNews(\AppBundle\Entity\GameUserNews $gameUserNews)
+    {
+        $this->gameUserNews[] = $gameUserNews;
+
+        return $this;
+    }
+
+    /**
+     * Remove gameUserNews
+     *
+     * @param \AppBundle\Entity\GameUserNews $gameUserNews
+     */
+    public function removeGameUserNews(\AppBundle\Entity\GameUserNews $gameUserNews)
+    {
+        $this->gameUserNews->removeElement($gameUserNews);
+    }
+
+    /**
+     * Get gameUserNews
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGameUserNews()
+    {
+        return $this->gameUserNews;
+    }
+
+    /**
+     * Add gameUserRate
+     *
+     * @param \AppBundle\Entity\GameUserRate $gameUserRate
+     *
+     * @return Game
+     */
+    public function addGameUserRate(\AppBundle\Entity\GameUserRate $gameUserRate)
+    {
+        $this->gameUserRate[] = $gameUserRate;
+
+        return $this;
+    }
+
+    /**
+     * Remove gameUserRate
+     *
+     * @param \AppBundle\Entity\GameUserRate $gameUserRate
+     */
+    public function removeGameUserRate(\AppBundle\Entity\GameUserRate $gameUserRate)
+    {
+        $this->gameUserRate->removeElement($gameUserRate);
+    }
+
+    /**
+     * Get gameUserRate
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGameUserRate()
+    {
+        return $this->gameUserRate;
+    }
+
+    /**
+     * Set edition
+     *
+     * @param \AppBundle\Entity\Edition $edition
+     *
+     * @return Game
+     */
+    public function setEdition(\AppBundle\Entity\Edition $edition)
+    {
+        $this->edition = $edition;
+
+        return $this;
+    }
+
+    /**
+     * Get edition
+     *
+     * @return \AppBundle\Entity\Edition
+     */
+    public function getEdition()
+    {
+        return $this->edition;
     }
 }
