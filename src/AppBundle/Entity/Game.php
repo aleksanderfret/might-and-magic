@@ -6,7 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity 
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\GameRepository")
  * @ORM\Table(name="game", indexes={@ORM\Index(name="idx_game_editionId", columns={"edition_id"})})
  */
 class Game
@@ -21,7 +22,12 @@ class Game
     /**
      *  @ORM\Column(type="string", length=100)
      */
-    protected $gameTitle;
+    protected $title;
+    
+    /**
+     *  @ORM\Column(type="smallint", options={"default":1})
+     */
+    protected $expansion;
 
     /**
      *  @ORM\Column(type="text", nullable=true)
@@ -503,5 +509,29 @@ class Game
     public function getEdition()
     {
         return $this->edition;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return Game
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 }

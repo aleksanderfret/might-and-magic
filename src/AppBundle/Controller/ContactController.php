@@ -10,5 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ContactController
 {
-    //put your code here
+    /*
+     *  put your code here
+     */
 }
