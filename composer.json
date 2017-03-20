@@ -31,7 +31,9 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "mysql-workbench-schema-exporter/mysql-workbench-schema-exporter": "^3.0",
+        "mysql-workbench-schema-exporter/doctrine2-exporter": "^3.0"
     },
     "scripts": {
         "symfony-scripts": [
