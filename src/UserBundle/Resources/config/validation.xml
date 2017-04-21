@@ -1,0 +1,155 @@
+<?xml version="1.0" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
+        http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="UserBundle\Entity\User">
+
+        <property name="username">
+            <constraint name="NotBlank">
+                <option name="message">fos_user.username.blank</option>
+                <option name="groups">
+                    <value>mimRegistration</value>
+                    <value>mimProfile</value>
+                </option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">3</option>
+                <option name="minMessage">fos_user.username.short</option>
+                <option name="max">50</option>
+                <option name="maxMessage">fos_user.username.long</option>
+                <option name="groups">
+                    <value>mimRegistration</value>
+                    <value>mimProfile</value>
+                </option>
+            </constraint>
+            <constraint name="Regex">
+                <option name="pattern">/^[0-9a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]+$/</option>
+                <option name="message">fos_user.username.mismatch</option>                
+                <option name="groups">
+                    <value>mimRegistration</value>
+                    <value>mimProfile</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="email">
+            <constraint name="NotBlank">
+                <option name="message">fos_user.email.blank</option>
+                <option name="groups">
+                    <value>mimRegistration</value>
+                    <value>mimProfile</value>
+                </option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">5</option>
+                <option name="minMessage">fos_user.email.short</option>
+                <option name="max">180</option>
+                <option name="maxMessage">fos_user.email.long</option>
+                <option name="groups">
+                    <value>mimRegistration</value>
+                    <value>mimProfile</value>
+                </option>
+            </constraint>
+            <constraint name="Email">
+                <option name="message">fos_user.email.invalid</option>
+                <option name="groups">
+                    <value>mimRegistration</value>
+                    <value>mimProfile</value>
+                </option>
+            </constraint>
+        </property>
+
+        <property name="plainPassword">
+            <constraint name="NotBlank">
+                <option name="message">fos_user.password.blank</option>
+                <option name="groups">
+                    <value>mimRegistration</value>
+                    <value>mimResetPassword</value>
+                    <value>mimChangePassword</value>
+                </option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">6</option>
+                <option name="max">128</option>
+                <option name="minMessage">fos_user.password.short</option>
+                <option name="maxMessage">fos_user.password.long</option>
+                <option name="groups">
+                    <value>mimRegistration</value>
+                    <value>mimProfile</value>
+                    <value>mimResetPassword</value>
+                    <value>mimChangePassword</value>
+                </option>
+            </constraint>
+            <constraint name="Regex">
+                <option name="pattern">/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{6,128}$/</option>
+                <option name="message">fos_user.password.invalid</option>                
+                <option name="groups">
+                    <value>mimRegistration</value>
+                    <value>mimProfile</value>
+                    <value>mimResetPassword</value>
+                    <value>mimChangePassword</value>
+                </option>
+            </constraint>
+        </property>
+        
+        <property name="name">
+            <constraint name="Length">
+                <option name="min">3</option>
+                <option name="max">50</option>
+                <option name="minMessage">fos_user.name.short</option>
+                <option name="maxMessage">fos_user.name.long</option>
+                <option name="groups">
+                    <value>mimRegistration</value>
+                    <value>mimProfile</value>                    
+                </option>
+            </constraint>
+            <constraint name="Regex">
+                <option name="pattern">/^[a-zA-ZęóąśłżźćńĘĄŚŁŻŹĆŃ -]{3,50}$/</option>
+                <option name="message">fos_user.name.mismatch</option>                
+                <option name="groups">
+                    <value>mimRegistration</value>
+                    <value>mimProfile</value>
+                </option>
+            </constraint>
+        </property>
+        
+        <property name="surname">
+            <constraint name="Length">
+                <option name="min">3</option>
+                <option name="max">100</option>
+                <option name="minMessage">fos_user.surname.short</option>
+                <option name="maxMessage">fos_user.surname.long</option>
+                <option name="groups">
+                    <value>mimRegistration</value>
+                    <value>mimProfile</value>                    
+                </option>
+            </constraint>
+            <constraint name="Regex">
+                <option name="pattern">/^[a-zA-ZęóąśłżźćńĘĄŚŁŻŹĆŃ -]{3,100}$/</option>
+                <option name="message">fos_user.surname.mismatch</option>                
+                <option name="groups">
+                    <value>mimRegistration</value>
+                    <value>mimProfile</value>
+                </option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="UserBundle\Entity\Group">
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">fos_user.group.blank</option>
+                <option name="groups">mimRegistration</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="minMessage">fos_user.group.short</option>
+                <option name="max">180</option>
+                <option name="maxMessage">fos_user.group.long</option>
+                <option name="groups">mimRegistration</option>
+            </constraint>
+        </property>
+    </class>
+
+</constraint-mapping>

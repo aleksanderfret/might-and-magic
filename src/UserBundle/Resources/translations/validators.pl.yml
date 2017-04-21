@@ -1,0 +1,37 @@
+fos_user:
+    username:
+        already_used: 'Ta nazwa użytkownika jest już zajęta.'
+        blank: 'Proszę podać nazwę użytkownika.'
+        short: 'Nazwa użytkownika jest za krótka. Musi zawierać przynajmniej 3 znaki.'
+        long: 'Nazwa użytkownika jest za długa. Może zwierać maksymalnie 50 znaków.'
+        mismatch: 'Nazwa użytkownika może zawierać tylko litery i cyfry. '
+    email:
+        already_used: 'Podany email jest zajęty.'
+        blank: 'Proszę podać adres email.'
+        short: 'Podany email jest za krótki.'
+        long: 'Podany email jest za długi.'
+        invalid: 'Podany adres email jest nieprawidłowy.'
+    password:
+        blank: 'Proszę podać hasło.'
+        short: 'Podane hasło jest za krótkie. Musi zawierać minimum 6 znaków.'
+        long: 'Podane hasło jest za długie.'
+        mismatch: 'Hasła nie pasują do siebie.'
+        invalid: 'Hasło musi zawierać przynajmniej jedną cyfrę, jedną małą literę, jedną wielką literę oraz jeden znak specjalny.'
+    new_password:
+        blank: 'Proszę podać nowe hasło.'
+        short: 'Podane nowe hasło jest za krótkie.'
+    name:
+        short: 'Imię jest za krótkie. Musi zawierać przynajmniej 3 znaki.'
+        long: 'Imię jest za długie. Może zwierać maksymalnie 50 znaków.'
+        mismatch: 'Imię może zawierać tylko litery, dywizy i spacje.'
+    surname:
+        short: 'Nazwisko jest za krótkie. Musi zawierać przynajmniej 3 znaki.'
+        long: 'Nazwisko jest za długie. Może zwierać maksymalnie 100 znaków.'
+        mismatch: 'Nazwisko może zawierać tylko litery, dywizy i spacje.'
+    current_password:
+        invalid: 'Podane hasło jest nieprawidłowe.'
+    group:
+        blank: 'Proszę podać nazwę.'
+        short: 'Podana nazwa jest za krótka.'
+        long: 'Podana nazwa jest za długa.'
+        

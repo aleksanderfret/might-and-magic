@@ -1,8 +1,0 @@
-{# empty Twig template #}
-<h1>Gry:</h1>
-<ul>
-    {% for row in game %}
-        <li>{{ row.title }}, edycja: {{row.edition.edition}}</li>
-    {% endfor %}
-</ul>
-<div><a href="{{ url('addGame') }}"> dodaj grę</a></div>
