@@ -1,0 +1,39 @@
+{% extends 'GameBundle::base.html.twig' %}
+
+{% block content %}
+    <h2> {{ game.title }}</h2>
+    <h6>{% if game.expansion %}Rozszerzenie gry{% else %}Gra podstawowa{% endif %}</h6>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {{ render(controller('GameBundle:Game:RateForm', { 'title': game.title })) }}
+        {% else %}
+            <p>
+                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                {{ 'rate.to_vote_for_a_game'|trans }}
+            </p>
+        {% endif %}
+    <p>{{ game.note }}</p>
+        <ul>
+            <li>Data utworzenia gry: {{  game.createDate.date|date("d.m.Y") }}.</li>
+            <li>Data dodania do kOLOs edition: {{ game.addDate.date|date("d.m.Y") }}, o godzinie {{ game.addDate.date|date("H:i:s") }}.</li>
+            <li>Data ostatniej modyfikacji: {{ game.modDate.date|date("d.m.Y") }}, o godzinie {{ game.addDate.date|date("H:i:s") }}.</li>
+            <li>Edycja gry: {{ game.edition.edition }}</li>
+        </ul>
+        <p>{{ game.description }}</p>
+        <div>
+        {# The 'IS_AUTHENTICATED_FULLY' role ensures that the user has entered
+        his/her credentials (login + password) during this session. If he/she
+        is automatically logged via the 'Remember Me' functionality, he/she won't
+        be able to add a comment.
+        See http://symfony.com/doc/current/cookbook/security/remember_me.html#forcing-the-user-to-re-authenticate-before-accessing-certain-resources
+        #}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {{ render(controller('GameBundle:Game:commentForm', { 'title': game.title })) }}
+        {% else %}
+            <p>
+                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                {{ 'post.to_publish_a_comment'|trans }}
+            </p>
+        {% endif %}
+    </div>
+    <div><a href="{{ url('editGame', {'title' : game.title}) }}">edytuj {{game.title}}</a></div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'GameBundle::base.html.twig' %}
+
+{% block content %}
+    <h2>Gry:</h2>
+    <ul>
+        {% for row in game %}
+            <li><a href="{{ path('show_game', {'title': row.title}) }}">{{ row.title }}</a>, edycja: {{row.edition.edition}}</li>
+        {% endfor %}
+    </ul>
+    <div><a href="{{ url('addGame') }}"> dodaj grę</a></div>
+{% endblock %}

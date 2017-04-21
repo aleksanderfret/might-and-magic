@@ -1,0 +1,32 @@
+services:
+    user.security.login_success_handler:
+        class:  UserBundle\Security\LoginSuccessHandler
+
+#        tags:
+#            - { name: 'monolog.logger', channel: 'security' } 
+            
+    user.security.logout_success_handler:
+        class:  UserBundle\Security\LogoutSuccessHandler
+
+#        tags:
+#            - { name: 'monolog.logger', channel: 'security' }
+
+    app.form.registration:
+        class: UserBundle\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: app_user_registration }
+
+    user.register_success:
+        class: UserBundle\EventListener\UserRegisterDateListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+#    user.authentication_success:
+#        class: UserBundle\EventListener\UserAuthenticationRedirectListener
+#        tags:
+#            - { name: kernel.event_subscriber }
+#                
+    user.last_route_event_listener:
+        class: UserBundle\EventListener\LastRouteListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 30 }

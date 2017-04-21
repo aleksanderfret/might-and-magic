@@ -1,0 +1,27 @@
+{{ form_start(form, { method: 'post', action: path('new_comment', {'title': game.title}) }) }}
+    {#  instead of displaying form fields one by one, you can also display them
+        all with their default options and styles just by calling to this function:
+
+        {{ form_widget(form) }}
+    #}
+
+    <fieldset>
+        <legend>{{ 'title.add_comment'|trans }}</legend>
+
+        {# Render any global form error (e.g. when a constraint on a public getter method failed) #}
+        {{ form_errors(form) }}
+
+        <div>
+            {{ form_label(form.comment, 'label.content') }}
+
+            {# Render any errors for the "content" field (e.g. when a class property constraint failed) #}
+            {{ form_errors(form.comment) }}
+
+            {{ form_widget(form.comment, { attr: { rows: 10 } }) }}
+        </div>
+
+        <div>
+            <button type="submit">{{ 'action.publish_comment'|trans }}</button>
+        </div>
+    </fieldset>
+{{ form_end(form) }}
