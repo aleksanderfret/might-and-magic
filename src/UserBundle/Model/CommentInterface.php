@@ -10,9 +10,9 @@ interface CommentInterface
     
     public function getComment();
     
-    public function setAddDate($addDate);
+    public function setPublishedDate($addDate);
     
-    public function getAddDate();
+    public function getPublishedDate();
     
     public function setAuthor(\UserBundle\Entity\User $user = null);
     

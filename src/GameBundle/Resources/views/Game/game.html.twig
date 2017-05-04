@@ -2,15 +2,25 @@
 
 {% block content %}
     <h2> {{ game.title }}</h2>
-    <h6>{% if game.expansion %}Rozszerzenie gry{% else %}Gra podstawowa{% endif %}</h6>
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            {{ render(controller('GameBundle:Game:RateForm', { 'title': game.title })) }}
-        {% else %}
-            <p>
-                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-                {{ 'rate.to_vote_for_a_game'|trans }}
-            </p>
-        {% endif %}
+    <h6>{% if game.expansion %}Rozszerzenie gry{% else %}Gra podstawowa{% endif %}</h6>    
+        {% block rating %}
+            {% if rate.avg %}
+                <div>
+                {{'game.average_rate'|trans}} {{rate.avg}}, {{'game.num_rate'|transchoice(rate.num)}}
+                </div>
+             {% endif %}
+            <div>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <div>{{'game.user_rate'|trans}}: {% for rate in commentrate %}{% if rate.user == app.user.id %}{{rate.rate}}{% endif %}{% endfor %}</div>
+                {{ render(controller('GameBundle:Game:RateForm', { 'title': game.title })) }}
+            {% else %}
+                <p>
+                    <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                    {{ 'login.to_rate'|trans }}
+                </p>
+            {% endif %}
+            <div>
+        {% endblock %}
     <p>{{ game.note }}</p>
         <ul>
             <li>Data utworzenia gry: {{  game.createDate.date|date("d.m.Y") }}.</li>
@@ -31,9 +41,35 @@
         {% else %}
             <p>
                 <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-                {{ 'post.to_publish_a_comment'|trans }}
+                {{ 'login.to_comment'|trans }}
             </p>
         {% endif %}
+    </div>
+    <div>
+        <h3>{{ 'game.num_comments'|transchoice(game.comment|length) }}</h3>
+        <div>
+            {% for comment in game.comment|reverse %}
+                <div>
+                    <a name="comment_{{ comment.id }}"></a>
+                    <h4>{{ 'game.comment_author'|trans }} : {{ comment.author }} |
+                        {{ comment.publishedDate.date|date("d.m.Y H:i:s") }} |
+                        Ocenił(a) tę grę na 
+                        {% for rate in commentrate %}
+                            {% if rate.user == comment.author.id %}
+                                {{rate.rate}}.
+                            {% endif %}
+                        {% endfor %}
+                    </h4>
+                    <div>
+                        {{ comment.comment }}
+                    </div>
+                </div>
+            {% else %}
+                <div>
+                    <p>{{ 'game.no_comments'|trans }}</p>
+                </div>
+            {% endfor %}
+        </div>
     </div>
     <div><a href="{{ url('editGame', {'title' : game.title}) }}">edytuj {{game.title}}</a></div>
 {% endblock %}
