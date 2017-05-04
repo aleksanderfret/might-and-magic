@@ -42,6 +42,11 @@ class Comment implements UserCommentInterface
      *     max=10000,
      *     maxMessage="comment.too_long"
      * )
+     * @Assert\Regex(
+     *     pattern     = "/^[a-zA-ZęóąśłżźćńĘĄŚŁŻŹĆŃ0-9 !?,.:)(-_]+$/",
+     *     htmlPattern = "^[a-zA-ZęóąśłżźćńĘĄŚŁŻŹĆŃ0-9 !?,.:)(-_]+$",
+     *     message     = "comment.mismatch"
+     * )
      */
     protected $comment;
     
@@ -52,9 +57,9 @@ class Comment implements UserCommentInterface
     protected $parentComment;
     
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(name="publishedDate",type="datetime")
      */
-    protected $addDate;
+    protected $publishedDate;
         
     /**
      * @ORM\ManyToOne(targetEntity="GameBundle\Model\UserInterface", inversedBy="comment")
@@ -115,33 +120,33 @@ class Comment implements UserCommentInterface
     }
 
     /**
-     * Set addDate
+     * Set publishedDate
      *
-     * @param \DateTime $addDate
+     * @param \DateTime $publishedDate
      *
      * @return Comment
      */
-    public function setAddDate($addDate)
+    public function setPublishedDate($publishedDate)
     {
-        $this->addDate = $addDate;
+        $this->publishedDate = $publishedDate;
 
         return $this;
     }
 
     /**
-     * Get addDate
+     * Get publishedDate
      *
      * @return \DateTime
      */
-    public function getAddDate()
+    public function getPublishedDate()
     {
-        return $this->addDate;
+        return $this->publishedDate;
     }
 
     /**
      * Set user
      *
-     * @param \GameBundle\Entity\User $user
+     * @param \UserBundle\Entity\User $user
      *
      * @return Comment
      */
@@ -155,11 +160,11 @@ class Comment implements UserCommentInterface
     /**
      * Get user
      *
-     * @return \GameBundle\Entity\User
+     * @return \UserBundle\Entity\User
      */
     public function getAuthor()
     {
-        return $this->user;
+        return $this->author;
     }
 
     /**

@@ -1,0 +1,6 @@
+## YAML Template.
+---
+comment.blank: Proszę napisać komentarz.
+comment.too_short: Treść komentarza jest za krótka.
+comment.too_long: Treść komentarza jest za długa.
+comment.mismatch: Treść komentarza może zawierać tylko litery, cyfry oraz znaki !?,.:()-_ .

@@ -224,11 +224,15 @@
                 <target>Proszę napisać komentarz.</target>
             </trans-unit>
             <trans-unit id="comment.too_short">
-                <source>comment.too_shortk</source>
+                <source>comment.too_short</source>
                 <target>Treść komentarza jest za krótka.</target>
             </trans-unit>
             <trans-unit id="comment.too_long">
                 <source>comment.too_long</source>
+                <target>Treść komentarza może zaiwerać tylko litery, cyfry oraz znaki.</target>
+            </trans-unit>
+            <trans-unit id="comment.mismatch">
+                <source>"comment.mismatch</source>
                 <target>Treść komentarza jest za długa.</target>
             </trans-unit>
             <trans-unit id="rate.to_vote_for_a_game">
@@ -239,6 +243,9 @@
                 <source>post.to_publish_a_comment</source>
                 <target>aby skomentować</target>
             </trans-unit>
+            
+            
+            
             
             
             <trans-unit id="post.num_comments">
@@ -257,6 +264,7 @@
                 <source>post.no_posts_found</source>
                 <target>Brak artykułów</target>
             </trans-unit>
+            
             
             
             

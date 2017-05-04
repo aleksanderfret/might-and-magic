@@ -13,7 +13,7 @@ use UserBundle\Model\GameUserRateInterface as UserGameUserRateInterface;
  *          @ORM\Index(name="idx_gameUserRate_rate_id", columns={"rate_id"}),
  *          @ORM\Index(name="idx_gameUserRate_user_id", columns={"user_id"}),
  *          @ORM\Index(name="idx_gameUserRate_game_id", columns={"game_id"})
- *      }
+ *      },
  * )
  */
 class GameUserRate implements UserGameUserRateInterface
@@ -33,7 +33,6 @@ class GameUserRate implements UserGameUserRateInterface
     protected $game;
     
     /**
-     * @ORM\Id
      * @ORM\ManyToOne(
      *      targetEntity="Rate",
      *      inversedBy="gameUserRate"
@@ -112,11 +111,11 @@ class GameUserRate implements UserGameUserRateInterface
     /**
      * Set user
      *
-     * @param \GameBundle\Entity\User $user
+     * @param \UserBundle\Entity\User $user
      *
      * @return GameUserRate
      */
-    public function setUser(\GameBundle\Entity\User $user)
+    public function setUser(\UserBundle\Entity\User $user)
     {
         $this->user = $user;
 
@@ -126,7 +125,7 @@ class GameUserRate implements UserGameUserRateInterface
     /**
      * Get user
      *
-     * @return \GameBundle\Entity\User
+     * @return \UserBundle\Entity\User
      */
     public function getUser()
     {

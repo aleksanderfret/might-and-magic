@@ -21,11 +21,6 @@ services:
         tags:
             - { name: kernel.event_subscriber }
     
-#    user.authentication_success:
-#        class: UserBundle\EventListener\UserAuthenticationRedirectListener
-#        tags:
-#            - { name: kernel.event_subscriber }
-#                
     user.last_route_event_listener:
         class: UserBundle\EventListener\LastRouteListener
         tags:

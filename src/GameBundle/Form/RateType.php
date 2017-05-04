@@ -3,6 +3,7 @@
 namespace GameBundle\Form;
 
 use GameBundle\Entity\Rate;
+use GameBundle\Entity\GameUserRate;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,7 +26,7 @@ class RateType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Rate::class,
+            'data_class' => GameUserRate::class,
         ]);
     }
 }

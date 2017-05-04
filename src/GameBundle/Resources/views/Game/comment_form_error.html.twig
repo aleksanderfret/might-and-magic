@@ -1,0 +1,11 @@
+{% extends 'GameBundle::base.html.twig' %}
+
+{% block body_id 'comment_form_error' %}
+
+{% block content %}
+    <h4>{{ 'error.publish_comment'|trans }}</h4>
+
+    <div>
+        {{ include('GameBundle::Game/comment_form.html.twig') }}
+    </div>
+{% endblock %}

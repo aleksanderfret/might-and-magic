@@ -1,0 +1,22 @@
+## RATE
+login.to_rate: aby zagłosować
+title.add_rate: Zagłosuj
+label.content_rate: Ocena
+action.add_rate: Zagłosuj
+error.add_rate: Podczas dodawania Twojej oceny wystąpił błąd.
+game.average_rate: Ocena
+game.no.rate: Bądź pierwszym, który oceni.
+game.num_rate: %count% głos|%count% głosy|%count% głosów
+game.user_rate: Twoja ocena
+game.ranking_place: Miejsce w rankingu
+
+## COMMENT
+login.to_comment: aby skomentować
+title.add_comment: Dodaj komentarz
+label.content_comment: Treść
+action.publish_comment: Skomentuj
+error.publish_comment: Podczas publikacji Twojego komentarza wystąpił błąd.
+game.comment_author: autor
+game.commented_on: skomentował
+game.no_comments: Bądź pierwszym, który skomentuje.
+game.num_comments: %count% komentarz|%count% komentarze|%count% komentarzy

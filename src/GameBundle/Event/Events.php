@@ -1,6 +1,6 @@
 <?php
 
-namespace GameBundle;
+namespace GameBundle\Event;
 
 final class Events
 {
@@ -10,4 +10,11 @@ final class Events
      * @var string
      */
     const COMMENT_CREATED = 'comment.created';
+    
+    /**
+     * @Event("Symfony\Component\EventDispatcher\GenericEvent")
+     *
+     * @var string
+     */
+    const RATE_ADDED = 'rate.added';
 }

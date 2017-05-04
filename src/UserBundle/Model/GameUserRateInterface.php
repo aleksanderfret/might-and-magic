@@ -12,7 +12,7 @@ interface GameUserRateInterface
 
     public function getRate();
 
-    public function setUser(\GameBundle\Entity\User $user);
+    public function setUser(\UserBundle\Entity\User $user);
    
     public function getUser();
 }

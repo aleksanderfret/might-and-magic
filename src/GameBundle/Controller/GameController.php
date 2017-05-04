@@ -3,9 +3,12 @@
 namespace GameBundle\Controller;
 
 use GameBundle\Entity\Game;
+use UserBundle\Entity\User;
 use GameBundle\Entity\Comment;
+use GameBundle\Entity\GameUserRate;
 use GameBundle\Form\CommentType;
 use GameBundle\Form\RateType;
+use GameBundle\Event\Events;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -38,7 +41,11 @@ class GameController extends Controller
      */
     public function showAction(Game $game)
     {
-        return $this->render('GameBundle:Game:game.html.twig', ['game' => $game]);
+        $averageGameRate = $this->get('doctrine')->getRepository('GameBundle:Game')->getAverageGameRate($game->getId());        
+        
+        $gamesRates = $this->get('doctrine')->getRepository('GameBundle:Game')->getGamesRatesforAuthorsOfComments($game->getId());
+        
+        return $this->render('GameBundle:Game:game.html.twig', ['game' => $game, 'rate'=>$averageGameRate, 'commentrate'=>$gamesRates]);
     }
     
     /**
@@ -48,7 +55,9 @@ class GameController extends Controller
      */
     public function commentNewAction(Request $request, Game $game)
     {
-        $form = $this->createForm(CommentType::class);
+        $commentResponse;
+        
+        $form = $this->createCommentType();
 
         $form->handleRequest($request);
         
@@ -56,7 +65,7 @@ class GameController extends Controller
             /* @var $comment Comment*/
             $comment = $form->getData();
             $comment->setAuthor($this->getUser());
-            $comment->setAddDate(new \DateTime());
+            $comment->setPublishedDate(new \DateTime());
             $comment->setGame($game);
             
             $entityManager = $this->getDoctrine()->getManager();
@@ -65,8 +74,15 @@ class GameController extends Controller
             
             $event = new GenericEvent($comment);
             $this->get('event_dispatcher')->dispatch(Events::COMMENT_CREATED, $event);
-            return $this->redirectToRoute('show_game', ['title' => $game->getTitle()]);
-        }
+            $commentResponse = $this->redirectToRoute('show_game', ['title' => $game->getTitle()]);
+        } else {
+            $commentResponse = $this->render('GameBundle:Game:comment_form_error.html.twig', [
+                'game' => $game,
+                'form' => $form->createView(),
+                ]
+            );
+        }        
+        return $commentResponse;
     }
     
     /**
@@ -83,23 +99,60 @@ class GameController extends Controller
      */
     public function commentFormAction(Game $game)
     {
-        $form = $this->createForm(CommentType::class);
-
+        $form = $this->createCommentType();
+        
         return $this->render('GameBundle:Game:comment_form.html.twig', [
             'game' => $game,
             'form' => $form->createView(),
         ]);
     }
     
+    private function createCommentType()
+    {
+        return $this->createForm(CommentType::class);
+    }
     
     /**
      * @Route("/rate/{title}/new", name="new_rate")
      * @Method("POST")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
-    public function rateNewAction()
+    public function rateNewAction(Request $request, Game $game)
     {
-        return new Response("Gra " . $title . " ma ocenę 5.");
+        $rateResponse;
+        $form = $this->createRateType();
+
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $formRate = $form->getData();
+            /* @var $dbRate GameUserRate */
+            $dbRate = $this->get('doctrine')->getRepository('GameBundle:GameUserRate')->findOneBy(["user"=>$this->getUser(), "game"=>$game ]);
+            
+            if (is_null($dbRate)) {
+                $dbRate = $formRate;
+                $dbRate->setGame($game);
+                $dbRate->setUser($this->getUser());
+            } else {
+                $dbRate->setRate($formRate->getRate());
+            }
+                       
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($dbRate);
+            $entityManager->flush();
+            
+            $event = new GenericEvent($dbRate);
+            $this->get('event_dispatcher')->dispatch(Events::RATE_ADDED, $event);
+            $rateResponse = $this->redirectToRoute('show_game', ['title' => $game->getTitle()]);
+        }
+        else {
+            $rateResponse = $this->render('GameBundle:Game:rate_form_error.html.twig', [
+                'game' => $game,
+                'form' => $form->createView(),
+            ]);
+        }        
+        return $rateResponse;
     }
     
     /**
@@ -109,7 +162,7 @@ class GameController extends Controller
      */
     public function rateFormAction(Game $game)
     {
-        $form = $this->createForm(RateType::class);
+        $form = $this->createRateType();
 
         return $this->render('GameBundle:Game:rate_form.html.twig', [
             'game' => $game,
@@ -117,7 +170,15 @@ class GameController extends Controller
         ]);
     }
     
-
+    private function createRateType()
+    {
+        return $this->createForm(RateType::class);
+    }
+    
+    
+    
+    
+    
     
     /**
      * @Route("admin/gry/{title}/edycja", name="editGame")
@@ -125,8 +186,7 @@ class GameController extends Controller
     public function editGameAction($title)
     {
         return new Response("Edycja gry: " . $title . ".");
-    }
-    
+    }    
     
     /**
      * @Route("gry/dodaj/grę", name="addGame")

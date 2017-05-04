@@ -50,7 +50,5 @@ class LastRouteListener
         $previousRoute = $session->get('this_route', []);
         $session->set('previous_route', $previousRoute);
         $session->set('this_route', $thisRoute);
-        
-        file_put_contents('D:\sesja2.txt', print_r($session, true));
     }
 }
