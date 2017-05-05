@@ -2,16 +2,18 @@
 
 {% block content %}
     <h2> {{ game.title }}</h2>
-    <h6>{% if game.expansion %}Rozszerzenie gry{% else %}Gra podstawowa{% endif %}</h6>    
+    <h6>{% if game.expansion %}{{'game.expanpansion_game'|trans}}{% else %}{{'game.main_game'|trans}}{% endif %}</h6>    
         {% block rating %}
             {% if rate.avg %}
                 <div>
                 {{'game.average_rate'|trans}} {{rate.avg}}, {{'game.num_rate'|transchoice(rate.num)}}
                 </div>
-             {% endif %}
+            {% else %}
+                {{'game.no_rate'|trans}}
+            {% endif %}             
             <div>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <div>{{'game.user_rate'|trans}}: {% for rate in commentrate %}{% if rate.user == app.user.id %}{{rate.rate}}{% endif %}{% endfor %}</div>
+                {% for rate in commentrate %}{% if rate.user == app.user.id %} <div>{{'game.user_rate'|trans}}: {{rate.rate}}</div>{% endif %}{% endfor %}
                 {{ render(controller('GameBundle:Game:RateForm', { 'title': game.title })) }}
             {% else %}
                 <p>
@@ -23,10 +25,10 @@
         {% endblock %}
     <p>{{ game.note }}</p>
         <ul>
-            <li>Data utworzenia gry: {{  game.createDate.date|date("d.m.Y") }}.</li>
-            <li>Data dodania do kOLOs edition: {{ game.addDate.date|date("d.m.Y") }}, o godzinie {{ game.addDate.date|date("H:i:s") }}.</li>
-            <li>Data ostatniej modyfikacji: {{ game.modDate.date|date("d.m.Y") }}, o godzinie {{ game.addDate.date|date("H:i:s") }}.</li>
-            <li>Edycja gry: {{ game.edition.edition }}</li>
+            <li>{{ 'game.created_date'|trans }}: {{  game.createDate.date|date("d.m.Y") }}.</li>
+            <li>{{ 'game.added_date'|trans }}: {{ game.addDate.date|date("d.m.Y") }}, {{ game.addDate.date|date("H:i:s") }}.</li>
+            <li>{{ 'game.modification_date'|trans }}: {{ game.modDate.date|date("d.m.Y") }}, {{ game.addDate.date|date("H:i:s") }}.</li>
+            <li>{{ 'game.edition'|trans }}: {{ game.edition.edition }}</li>
         </ul>
         <p>{{ game.description }}</p>
         <div>
@@ -53,10 +55,11 @@
                     <a name="comment_{{ comment.id }}"></a>
                     <h4>{{ 'game.comment_author'|trans }} : {{ comment.author }} |
                         {{ comment.publishedDate.date|date("d.m.Y H:i:s") }} |
-                        Ocenił(a) tę grę na 
                         {% for rate in commentrate %}
                             {% if rate.user == comment.author.id %}
-                                {{rate.rate}}.
+                                {{ 'game.comment_author_rate'|trans }} {{rate.rate}}.
+                            {% else %}
+                                {{ 'game.comment_author_no_rate'|trans }}
                             {% endif %}
                         {% endfor %}
                     </h4>

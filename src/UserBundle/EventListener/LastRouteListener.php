@@ -21,11 +21,11 @@ class LastRouteListener
 
         $thisRouteName = $request->get('_route');
         $thisRouteParams = $request->get('_route_params');
-        if ($thisRouteName[0] == '_') {
+        if ($thisRouteName[0] == '_' || preg_match('/comment/', $thisRouteName) || preg_match('/rate/', $thisRouteName)) {
             return;
         }
 
-        if ($thisRouteName == 'fos_user_security_login') {
+        if ($thisRouteName == 'fos_user_security_login' || $thisRouteName == 'fos_user_security_logout') {
             $session->set('previous_uri', $session->get('this_uri'));   
         }
         elseif ($thisRouteName == 'fos_user_security_check') {
@@ -33,9 +33,6 @@ class LastRouteListener
                 && null != $session->get('this_uri')) {
                 $session->set('previous_uri', $session->get('this_uri'));
             }
-        }
-        elseif ($thisRouteName == 'fos_user_security_logout') {            
-            return;            
         }
         else {        
             $thisUri = $request->getUri();
@@ -49,6 +46,6 @@ class LastRouteListener
         $thisRoute = ['name' => $thisRouteName, 'params' => $thisRouteParams];
         $previousRoute = $session->get('this_route', []);
         $session->set('previous_route', $previousRoute);
-        $session->set('this_route', $thisRoute);
+        $session->set('this_route', $thisRoute);        
     }
 }

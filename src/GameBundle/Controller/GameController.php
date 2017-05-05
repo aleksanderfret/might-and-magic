@@ -86,13 +86,6 @@ class GameController extends Controller
     }
     
     /**
-     * This controller is called directly via the render() function in the
-     * game.html.twig template. That's why it's not needed to define
-     * a route name for it.
-     *
-     * The "id" of the Game is passed in and then turned into a Game object
-     * automatically by the ParamConverter.
-     *
      * @param Game $game
      *
      * @return Response

@@ -5,9 +5,10 @@ label.content_rate: Ocena
 action.add_rate: Zagłosuj
 error.add_rate: Podczas dodawania Twojej oceny wystąpił błąd.
 game.average_rate: Ocena
-game.no.rate: Bądź pierwszym, który oceni.
+game.no_rate: Bądź pierwszą osobą, która oceni.
 game.num_rate: %count% głos|%count% głosy|%count% głosów
 game.user_rate: Twoja ocena
+game.user_no_rate: Oceń grę
 game.ranking_place: Miejsce w rankingu
 
 ## COMMENT
@@ -17,6 +18,17 @@ label.content_comment: Treść
 action.publish_comment: Skomentuj
 error.publish_comment: Podczas publikacji Twojego komentarza wystąpił błąd.
 game.comment_author: autor
+game.comment_author_rate: Ocenił(a) tę grę na
+game.comment_author_no_rate: Nie Ocenił(a) jeszcze tej gry
 game.commented_on: skomentował
-game.no_comments: Bądź pierwszym, który skomentuje.
+game.no_comments: Bądź pierwszą osobą, która skomentuje.
 game.num_comments: %count% komentarz|%count% komentarze|%count% komentarzy
+
+
+##GAME
+game.expanpansion_game: Rozszerzenie gry
+game.main_game: Gra podstawowa
+game.created_date: Data utworzenia gry
+game.added_date: Data dodania do kOLOs edition
+game.modification_date: Data ostatniej modyfikacji
+game.edition: Edycja gry
