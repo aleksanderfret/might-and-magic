@@ -19,7 +19,7 @@ action.publish_comment: Skomentuj
 error.publish_comment: Podczas publikacji Twojego komentarza wystąpił błąd.
 game.comment_author: autor
 game.comment_author_rate: Ocenił(a) tę grę na
-game.comment_author_no_rate: Nie Ocenił(a) jeszcze tej gry
+game.comment_author_no_rate: Nie Ocenił(a) jeszcze tej gry.
 game.commented_on: skomentował
 game.no_comments: Bądź pierwszą osobą, która skomentuje.
 game.num_comments: %count% komentarz|%count% komentarze|%count% komentarzy
