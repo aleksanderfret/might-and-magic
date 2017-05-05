@@ -1,78 +1,30 @@
 {% extends 'GameBundle::base.html.twig' %}
 
 {% block content %}
-    <h2> {{ game.title }}</h2>
-    <h6>{% if game.expansion %}{{'game.expanpansion_game'|trans}}{% else %}{{'game.main_game'|trans}}{% endif %}</h6>    
-        {% block rating %}
-            {% if rate.avg %}
-                <div>
-                {{'game.average_rate'|trans}} {{rate.avg}}, {{'game.num_rate'|transchoice(rate.num)}}
-                </div>
-            {% else %}
-                {{'game.no_rate'|trans}}
-            {% endif %}             
-            <div>
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                {% for rate in commentrate %}{% if rate.user == app.user.id %} <div>{{'game.user_rate'|trans}}: {{rate.rate}}</div>{% endif %}{% endfor %}
-                {{ render(controller('GameBundle:Game:RateForm', { 'title': game.title })) }}
-            {% else %}
-                <p>
-                    <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-                    {{ 'login.to_rate'|trans }}
-                </p>
-            {% endif %}
-            <div>
+    <div id="game_header">
+        {% block game_header %}
+            <h2> {{ game.title }}</h2>
+            <h3>{% if game.expansion %}{{'game.expanpansion_game'|trans}}{% else %}{{'game.main_game'|trans}}{% endif %}</h3>    
         {% endblock %}
-    <p>{{ game.note }}</p>
-        <ul>
-            <li>{{ 'game.created_date'|trans }}: {{  game.createDate.date|date("d.m.Y") }}.</li>
-            <li>{{ 'game.added_date'|trans }}: {{ game.addDate.date|date("d.m.Y") }}, {{ game.addDate.date|date("H:i:s") }}.</li>
-            <li>{{ 'game.modification_date'|trans }}: {{ game.modDate.date|date("d.m.Y") }}, {{ game.addDate.date|date("H:i:s") }}.</li>
-            <li>{{ 'game.edition'|trans }}: {{ game.edition.edition }}</li>
-        </ul>
-        <p>{{ game.description }}</p>
-        <div>
-        {# The 'IS_AUTHENTICATED_FULLY' role ensures that the user has entered
-        his/her credentials (login + password) during this session. If he/she
-        is automatically logged via the 'Remember Me' functionality, he/she won't
-        be able to add a comment.
-        See http://symfony.com/doc/current/cookbook/security/remember_me.html#forcing-the-user-to-re-authenticate-before-accessing-certain-resources
-        #}
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            {{ render(controller('GameBundle:Game:commentForm', { 'title': game.title })) }}
-        {% else %}
-            <p>
-                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-                {{ 'login.to_comment'|trans }}
-            </p>
-        {% endif %}
+    </div>    
+        
+    <div id="rating">    
+        {% block rating %}
+            {{ include('GameBundle::Game/rate_block.html.twig') }}
+        {% endblock %}
     </div>
-    <div>
-        <h3>{{ 'game.num_comments'|transchoice(game.comment|length) }}</h3>
-        <div>
-            {% for comment in game.comment|reverse %}
-                <div>
-                    <a name="comment_{{ comment.id }}"></a>
-                    <h4>{{ 'game.comment_author'|trans }} : {{ comment.author }} |
-                        {{ comment.publishedDate.date|date("d.m.Y H:i:s") }} |
-                        {% for rate in commentrate %}
-                            {% if rate.user == comment.author.id %}
-                                {{ 'game.comment_author_rate'|trans }} {{rate.rate}}.
-                            {% else %}
-                                {{ 'game.comment_author_no_rate'|trans }}
-                            {% endif %}
-                        {% endfor %}
-                    </h4>
-                    <div>
-                        {{ comment.comment }}
-                    </div>
-                </div>
-            {% else %}
-                <div>
-                    <p>{{ 'game.no_comments'|trans }}</p>
-                </div>
-            {% endfor %}
-        </div>
+    
+    <div id="game">
+        {% block game %}
+            {{ include('GameBundle::Game/game_block.html.twig') }}
+        {% endblock %}
     </div>
+    
+    <div id="comments">
+        {% block comments %}
+            {{ include('GameBundle::Game/comment_block.html.twig') }}
+        {% endblock %}
+    </div>
+    
     <div><a href="{{ url('editGame', {'title' : game.title}) }}">edytuj {{game.title}}</a></div>
 {% endblock %}

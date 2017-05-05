@@ -1,0 +1,8 @@
+<p>{{ game.note }}</p>
+<ul>
+    <li>{{ 'game.created_date'|trans }}: {{  game.createDate.date|date("d.m.Y") }}.</li>
+    <li>{{ 'game.added_date'|trans }}: {{ game.addDate.date|date("d.m.Y") }}, {{ game.addDate.date|date("H:i:s") }}.</li>
+    <li>{{ 'game.modification_date'|trans }}: {{ game.modDate.date|date("d.m.Y") }}, {{ game.addDate.date|date("H:i:s") }}.</li>
+    <li>{{ 'game.edition'|trans }}: {{ game.edition.edition }}</li>
+</ul>
+<p>{{ game.description }}</p>
