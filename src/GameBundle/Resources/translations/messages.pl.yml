@@ -1,29 +1,28 @@
 ## RATE
-login.to_rate: aby zagłosować
-title.add_rate: Zagłosuj
-label.content_rate: Ocena
-action.add_rate: Zagłosuj
-error.add_rate: Podczas dodawania Twojej oceny wystąpił błąd.
-game.average_rate: Ocena
-game.no_rate: Bądź pierwszą osobą, która oceni.
-game.num_rate: %count% głos|%count% głosy|%count% głosów
-game.user_rate: Twoja ocena
-game.user_no_rate: Oceń grę
-game.ranking_place: Miejsce w rankingu
+rate.login_to_rate: aby zagłosować
+rate.title_add_rate: Oceń grę
+rate.user_change_rate: Zmień ocenę
+rate.label_content_rate: Ocena
+rate.action_add_rate: Oceń grę
+rate.error_add_rate: Podczas dodawania Twojej oceny wystąpił błąd.
+rate.average_rate: Ocena
+rate.no_rate: Bądź pierwszą osobą, która oceni.
+rate.num_rate: %count% głos|%count% głosy|%count% głosów
+rate.user_rate: Twoja ocena
+rate.ranking_place: Miejsce w rankingu
 
 ## COMMENT
-login.to_comment: aby skomentować
-title.add_comment: Dodaj komentarz
-label.content_comment: Treść
-action.publish_comment: Skomentuj
-error.publish_comment: Podczas publikacji Twojego komentarza wystąpił błąd.
-game.comment_author: autor
-game.comment_author_rate: Ocenił(a) tę grę na
-game.comment_author_no_rate: Nie Ocenił(a) jeszcze tej gry.
-game.commented_on: skomentował
-game.no_comments: Bądź pierwszą osobą, która skomentuje.
-game.num_comments: %count% komentarz|%count% komentarze|%count% komentarzy
-
+comment.login_to_comment: aby skomentować
+comment.title_add_comment: Dodaj komentarz
+comment.label_content_comment: Treść
+comment.action_publish_comment: Skomentuj
+comment.error_publish_comment: Podczas publikacji Twojego komentarza wystąpił błąd.
+comment.comment_author: autor
+comment.author_game_rate: Ocenił(a) tę grę na
+comment.author_no_rate: Nie Ocenił(a) jeszcze tej gry.
+commnet.commented_on: skomentował
+comment.no_comments: Bądź pierwszą osobą, która skomentuje.
+comment.num_comments: %count% komentarz|%count% komentarze|%count% komentarzy
 
 ##GAME
 game.expanpansion_game: Rozszerzenie gry
