@@ -1,24 +1,27 @@
 <div>
     <p>
         {% if rate.avg %}
-            {{'game.average_rate'|trans}} {{rate.avg}}, {{'game.num_rate'|transchoice(rate.num)}}    
+            {{'rate.average_rate'|trans}} {{rate.avg}}, {{'rate.num_rate'|transchoice(rate.num)}}    
         {% else %}
-           {{'game.no_rate'|trans}}
+           {{'rate.no_rate'|trans}}
         {% endif %}
     </p>
 </div>
 <div>
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        {% for rate in commentrate %}
-            {% if rate.user == app.user.id %}
-                <p>{{'game.user_rate'|trans}}: {{rate.rate}}</p>
-            {% endif %}
-        {% endfor %}
-        {{ render(controller('GameBundle:Game:RateForm', { 'title': game.title })) }}
+        {% if userrate %}
+            <p>{{'rate.user_rate'|trans}}: {{userrate}}</p>
+            <p>{{ 'rate.user_change_rate'|trans }}</p>            
+        {% else %}
+            {% if rate.avg %}
+                <p>{{ 'rate.title_add_rate'|trans }}</p>
+            {% endif %}    
+        {% endif %}
+        {{ render(controller('GameBundle:Game:RateForm', { 'id': game.id })) }}
     {% else %}
         <p>
             <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-            {{ 'login.to_rate'|trans }}
+            {{ 'rate.login_to_rate'|trans }}
         </p>
     {% endif %}   
 </div>

@@ -26,5 +26,5 @@
         {% endblock %}
     </div>
     
-    <div><a href="{{ url('editGame', {'title' : game.title}) }}">edytuj {{game.title}}</a></div>
+    <div><a href="{{ url('editGame', {'slug' : game.slug}) }}">edytuj {{game.title}}</a></div>
 {% endblock %}

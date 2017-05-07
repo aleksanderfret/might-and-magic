@@ -28,7 +28,46 @@ class GameRepository extends EntityRepository
             return null;
         }
     }
+    public function getUserGameRate(int $gameId, int $userId)
+    {
+        $query = $this->getEntityManager()->createQuery(
+            "SELECT r.value AS userrate FROM GameBundle:GameUserRate g LEFT JOIN g.rate r WHERE g.game = :gid AND g.user = :uid"
+        );
+        $query->setParameter('gid', $gameId);
+        $query->setParameter('uid', $userId);
+            
+        try {
+            $resultArray = $query->getResult();
+            if(!empty($resultArray)){
+                $responseValue = $resultArray[0]['userrate'];
+            } else {
+                $responseValue = null;
+            }
+            return $responseValue;
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
     
+    public function getRankingPosition()
+    {
+        $query = $this->getEntityManager()->createQuery(
+            "SELECT g.value AS position FROM GameBundle:Game g ASC WHERE g.game = :gid"
+        );
+        $query->setParameter('gid', $gameId);
+        try {
+            $resultArray = $query->getResult();
+            if(!empty($resultArray)){
+                $responseValue = $resultArray[0]['userrate'];
+            } else {
+                $responseValue = null;
+            }
+            return $responseValue;
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
+            
     public function getGamesRatesforAuthorsOfComments(int $gameId)
     {
         $query = $this->getEntityManager()
