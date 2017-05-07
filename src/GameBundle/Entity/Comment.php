@@ -83,6 +83,7 @@ class Comment implements UserCommentInterface
     public function __construct()
     {
         $this->answer = new ArrayCollection();
+        $this->publishedDate = new \DateTime();
     }
 
     /**

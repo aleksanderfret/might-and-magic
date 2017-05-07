@@ -70,7 +70,6 @@ class GameController extends Controller
             /* @var $comment Comment*/
             $comment = $form->getData();
             $comment->setAuthor($this->getUser());
-            $comment->setPublishedDate(new \DateTime());
             $comment->setGame($game);
             
             $entityManager = $this->getDoctrine()->getManager();
