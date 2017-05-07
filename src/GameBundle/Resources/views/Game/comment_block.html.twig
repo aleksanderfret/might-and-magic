@@ -1,27 +1,29 @@
 <div>        
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        {{ render(controller('GameBundle:Game:commentForm', { 'title': game.title })) }}
+        {{ render(controller('GameBundle:Game:commentForm', { 'id': game.id })) }}
     {% else %}
         <p>
             <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-            {{ 'login.to_comment'|trans }}
+            {{ 'comment.login_to_comment'|trans }}
         </p>
     {% endif %}
 </div>
-<h4>{{ 'game.num_comments'|transchoice(game.comment|length) }}</h4>
+<h4>{{ 'comment.num_comments'|transchoice(game.comment|length) }}</h4>
     <div>
         {% for comment in game.comment|reverse %}
             <div>
                 <a name="comment_{{ comment.id }}"></a>
-                <h5>{{ 'game.comment_author'|trans }} : {{ comment.author }} |
-                    {{ comment.publishedDate.date|date("d.m.Y H:i:s") }} |
-                    {% for rate in commentrate %}
-                        {% if rate.user == comment.author.id %}
-                            {{ 'game.comment_author_rate'|trans }} {{rate.rate}}.
-                        {% else %}
-                            {{ 'game.comment_author_no_rate'|trans }}
-                        {% endif %}
-                    {% endfor %}
+                <h5>{{ 'comment.comment_author'|trans }} : {{ comment.author }} |
+                    {{ comment.publishedDate.date|date("d.m.Y H:i:s") }}
+                    {% if rate %}
+                        {% for rate in commentrate %}
+                            {% if rate.user == comment.author.id %}
+                                | {{ 'comment.author_game_rate'|trans }} {{rate.rate}}.
+                            {% else %}
+                                | {{ 'comment.author_no_rate'|trans }}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </h5>
             </div>
             <div>
@@ -29,7 +31,7 @@
             </div>
         {% else %}
             <div>
-                <p>{{ 'game.no_comments'|trans }}</p>
+                <p>{{ 'comment.no_comments'|trans }}</p>
             </div>
         {% endfor %}
     </div>

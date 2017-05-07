@@ -1,13 +1,10 @@
-{{ form_start(form, { method: 'post', action: path('new_rate', {'title': game.title}) }) }}
-    
+{{ form_start(form, { method: 'post', action: path('new_rate', {'slug': game.slug}) }) }}
     <fieldset>
-        <legend>{{ 'title.add_rate'|trans }}</legend>
-
         {# Render any global form error (e.g. when a constraint on a public getter method failed) #}
         {{ form_errors(form) }}
 
         <div>
-            {{ form_label(form.rate, 'label.content_rate') }}
+            {{ form_label(form.rate, 'rate.label_content_rate') }}
 
             {# Render any errors for the "content" field (e.g. when a class property constraint failed) #}
             {{ form_errors(form.rate) }}
@@ -16,7 +13,7 @@
         </div>
 
         <div>
-            <button type="submit">{{ 'action.add_rate'|trans }}</button>
+            <button type="submit">{{ 'rate.action_add_rate'|trans }}</button>
         </div>
     </fieldset>
 {{ form_end(form) }}

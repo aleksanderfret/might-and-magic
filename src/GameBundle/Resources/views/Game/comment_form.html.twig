@@ -1,13 +1,13 @@
-{{ form_start(form, { method: 'post', action: path('new_comment', {'title': game.title}) }) }}
+{{ form_start(form, { method: 'post', action: path('new_comment', {'slug': game.slug}) }) }}
     
     <fieldset>
-        <legend>{{ 'title.add_comment'|trans }}</legend>
+        <legend>{{ 'comment.title_add_comment'|trans }}</legend>
 
         {# Render any global form error (e.g. when a constraint on a public getter method failed) #}
         {{ form_errors(form) }}
 
         <div>
-            {{ form_label(form.comment, 'label.content_comment') }}
+            {{ form_label(form.comment, 'comment.label_content_comment') }}
 
             {# Render any errors for the "content" field (e.g. when a class property constraint failed) #}
             {{ form_errors(form.comment) }}
@@ -16,7 +16,7 @@
         </div>
 
         <div>
-            <button type="submit">{{ 'action.publish_comment'|trans }}</button>
+            <button type="submit">{{ 'comment.action_publish_comment'|trans }}</button>
         </div>
     </fieldset>
 {{ form_end(form) }}

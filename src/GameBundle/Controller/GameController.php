@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use FOS\UserBundle\Model\UserInterface;
 
 class GameController extends Controller
 {
@@ -34,22 +35,26 @@ class GameController extends Controller
     }
     
     /**
-     * @Route("gry/", defaults={"title": "Magia i Miecz"}, name="show_main_game")
-     * @Route("gry/{title}", name="show_game")
+     * @Route("gry/", defaults={"slug": "magia-i-miecz-edycja-kolosa"}, name="show_main_game")
+     * @Route("gry/{slug}", name="show_game")
      * @Method("GET")
      * @ParamConverter("game", class="GameBundle:Game")
      */
-    public function showAction(Game $game)
+    public function showAction(Request $request, Game $game)
     {
         $averageGameRate = $this->get('doctrine')->getRepository('GameBundle:Game')->getAverageGameRate($game->getId());        
-        
         $gamesRates = $this->get('doctrine')->getRepository('GameBundle:Game')->getGamesRatesforAuthorsOfComments($game->getId());
-        
-        return $this->render('GameBundle:Game:game.html.twig', ['game' => $game, 'rate'=>$averageGameRate, 'commentrate'=>$gamesRates]);
+        $user = $this->getUser();
+        if (!isset($user) || !is_object($user) || !$user instanceof UserInterface) {
+            $userRate = null; 
+        } else {
+            $userRate = $this->get('doctrine')->getRepository('GameBundle:Game')->getUserGameRate($game->getId(), $user->getId());
+        }
+        return $this->render('GameBundle:Game:game.html.twig', ['game' => $game, 'rate'=>$averageGameRate, 'userrate'=> $userRate, 'commentrate'=>$gamesRates]);
     }
     
     /**
-     * @Route("/comment/{title}/new", name="new_comment")
+     * @Route("/comment/{slug}/new", name="new_comment")
      * @Method("POST")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
@@ -74,7 +79,7 @@ class GameController extends Controller
             
             $event = new GenericEvent($comment);
             $this->get('event_dispatcher')->dispatch(Events::COMMENT_CREATED, $event);
-            $commentResponse = $this->redirectToRoute('show_game', ['title' => $game->getTitle()]);
+            $commentResponse = $this->redirectToRoute('show_game', ['slug' => $game->getSlug()]);
         } else {
             $commentResponse = $this->render('GameBundle:Game:comment_form_error.html.twig', [
                 'game' => $game,
@@ -106,7 +111,7 @@ class GameController extends Controller
     }
     
     /**
-     * @Route("/rate/{title}/new", name="new_rate")
+     * @Route("/rate/{slug}/new", name="new_rate")
      * @Method("POST")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
@@ -137,7 +142,7 @@ class GameController extends Controller
             
             $event = new GenericEvent($dbRate);
             $this->get('event_dispatcher')->dispatch(Events::RATE_ADDED, $event);
-            $rateResponse = $this->redirectToRoute('show_game', ['title' => $game->getTitle()]);
+            $rateResponse = $this->redirectToRoute('show_game', ['slug' => $game->getSlug()]);
         }
         else {
             $rateResponse = $this->render('GameBundle:Game:rate_form_error.html.twig', [
@@ -174,11 +179,11 @@ class GameController extends Controller
     
     
     /**
-     * @Route("admin/gry/{title}/edycja", name="editGame")
+     * @Route("admin/gry/{slug}/edition", name="editGame")
      */
-    public function editGameAction($title)
+    public function editGameAction($slug)
     {
-        return new Response("Edycja gry: " . $title . ".");
+        return new Response("Edycja gry: " . $slug . ".");
     }    
     
     /**

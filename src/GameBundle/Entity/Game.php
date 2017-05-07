@@ -60,6 +60,11 @@ class Game
     protected $download;
     
     /**
+     *  @ORM\Column(name="slug", type="string", length=128, unique=true, nullable=false)
+     */
+    protected $slug;
+
+    /**
      *  @ORM\ManyToMany(targetEntity="Image", mappedBy="game")
      */
     protected $image;
@@ -557,5 +562,29 @@ class Game
     public function getExpansion()
     {
         return $this->expansion;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Game
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }
