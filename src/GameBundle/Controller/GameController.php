@@ -45,6 +45,7 @@ class GameController extends Controller
         $averageGameRate = $this->get('doctrine')->getRepository('GameBundle:Game')->getAverageGameRate($game->getId());        
         $gamesRates = $this->get('doctrine')->getRepository('GameBundle:Game')->getGamesRatesforAuthorsOfComments($game->getId());
         $user = $this->getUser();
+        dump($user);die();
         if (!isset($user) || !is_object($user) || !$user instanceof UserInterface) {
             $userRate = null; 
         } else {

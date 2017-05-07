@@ -37,4 +37,12 @@ interface CommentInterface
     public function getParentComment();
     
     public function setParentComment(\GameBundle\Entity\Comment $parentComment = null);
+    
+    public function setCensored($censored);
+    
+    public function getCensored();
+    
+    public function setAccepted($accepted);
+    
+    public function getAccepted();
 }

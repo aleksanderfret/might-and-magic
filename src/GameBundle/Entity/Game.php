@@ -95,6 +95,16 @@ class Game
     protected $gameUserRate;
     
     /**
+     *  @ORM\Column(type="float", nullable=true)
+     */
+    protected $averageRate;
+    
+    /**
+     *  @ORM\Column(type="integer", nullable=true)
+     */
+    protected $numberOfRates;
+    
+    /**
      * @ORM\ManyToOne(targetEntity="Edition", inversedBy="game")
      * @ORM\JoinColumn(name="edition_id", referencedColumnName="id", nullable=false)
      */
@@ -586,5 +596,53 @@ class Game
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set averageRate
+     *
+     * @param float $averageRate
+     *
+     * @return Game
+     */
+    public function setAverageRate($averageRate)
+    {
+        $this->averageRate = $averageRate;
+
+        return $this;
+    }
+
+    /**
+     * Get averageRate
+     *
+     * @return float
+     */
+    public function getAverageRate()
+    {
+        return $this->averageRate;
+    }
+
+    /**
+     * Set numberOfRates
+     *
+     * @param integer $numberOfRates
+     *
+     * @return Game
+     */
+    public function setNumberOfRates($numberOfRates)
+    {
+        $this->numberOfRates = $numberOfRates;
+
+        return $this;
+    }
+
+    /**
+     * Get numberOfRates
+     *
+     * @return integer
+     */
+    public function getNumberOfRates()
+    {
+        return $this->numberOfRates;
     }
 }
