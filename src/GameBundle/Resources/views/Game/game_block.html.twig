@@ -1,8 +1,16 @@
-<p>{{ game.note }}</p>
-<ul>
-    <li>{{ 'game.created_date'|trans }}: {{  game.createDate.date|date("d.m.Y") }}.</li>
-    <li>{{ 'game.added_date'|trans }}: {{ game.addDate.date|date("d.m.Y") }}, {{ game.addDate.date|date("H:i:s") }}.</li>
-    <li>{{ 'game.modification_date'|trans }}: {{ game.modDate.date|date("d.m.Y") }}, {{ game.addDate.date|date("H:i:s") }}.</li>
-    <li>{{ 'game.edition'|trans }}: {{ game.edition.edition }}</li>
-</ul>
-<p>{{ game.description }}</p>
+    {% block about %}
+        {{ include('GameBundle::Game/about_block.html.twig') }}
+    {% endblock %}
+
+    {% block images %}
+        {{ include('GameBundle::Game/images_block.html.twig') }}
+    {% endblock %}
+
+    {% block contents %}
+        {{ include('GameBundle::Game/contents_block.html.twig') }}
+    {% endblock %}
+
+    {% block download %}
+        {{ include('GameBundle::Game/download_block.html.twig') }}
+    {% endblock %}
+      

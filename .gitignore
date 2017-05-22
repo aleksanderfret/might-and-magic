@@ -16,3 +16,8 @@
 /web/bundles/
 /nbproject/
 *.php~
+/web/src/assets/cover/
+/web/src/assets/image/
+/web/src/assets/download/
+/web/src/assets/layout/
+/web/assets/

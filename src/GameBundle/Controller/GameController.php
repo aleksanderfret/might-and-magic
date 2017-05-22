@@ -45,12 +45,12 @@ class GameController extends Controller
         $averageGameRate = $this->get('doctrine')->getRepository('GameBundle:Game')->getAverageGameRate($game->getId());        
         $gamesRates = $this->get('doctrine')->getRepository('GameBundle:Game')->getGamesRatesforAuthorsOfComments($game->getId());
         $user = $this->getUser();
-        dump($user);die();
         if (!isset($user) || !is_object($user) || !$user instanceof UserInterface) {
             $userRate = null; 
         } else {
             $userRate = $this->get('doctrine')->getRepository('GameBundle:Game')->getUserGameRate($game->getId(), $user->getId());
         }
+        #dump($game);exit();
         return $this->render('GameBundle:Game:game.html.twig', ['game' => $game, 'rate'=>$averageGameRate, 'userrate'=> $userRate, 'commentrate'=>$gamesRates]);
     }
     

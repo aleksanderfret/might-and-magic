@@ -24,10 +24,16 @@ commnet.commented_on: skomentował
 comment.no_comments: Bądź pierwszą osobą, która skomentuje.
 comment.num_comments: %count% komentarz|%count% komentarze|%count% komentarzy
 
-##GAME
+## GAME
 game.expanpansion_game: Rozszerzenie gry
 game.main_game: Gra podstawowa
 game.created_date: Data utworzenia gry
 game.added_date: Data dodania do kOLOs edition
 game.modification_date: Data ostatniej modyfikacji
 game.edition: Edycja gry
+game.resource_game: gra
+game.resource_instruction: instrukcja
+game.images: Galeria
+game.authors: Autorzy
+game.contents: Wyposażenie
+game.download: Pobierz

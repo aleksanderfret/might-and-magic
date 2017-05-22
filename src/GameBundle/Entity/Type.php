@@ -33,9 +33,9 @@ class Type
     protected $type;
     
     /**
-     * @ORM\OneToMany(targetEntity="Element", mappedBy="type")
+     * @ORM\OneToMany(targetEntity="Contents", mappedBy="type")
      */
-    protected $element;
+    protected $contents;
     
     /**
      * @ORM\OneToMany(targetEntity="Image", mappedBy="type")
@@ -51,7 +51,7 @@ class Type
 
     public function __construct()
     {
-        $this->element = new ArrayCollection();
+        $this->contents = new ArrayCollection();
         $this->image = new ArrayCollection();
     }
 
@@ -90,37 +90,37 @@ class Type
     }
 
     /**
-     * Add element
+     * Add content
      *
-     * @param \GameBundle\Entity\Element $element
+     * @param \GameBundle\Entity\Contents $content
      *
      * @return Type
      */
-    public function addElement(\GameBundle\Entity\Element $element)
+    public function addContent(\GameBundle\Entity\Contents $content)
     {
-        $this->element[] = $element;
+        $this->contents[] = $content;
 
         return $this;
     }
 
     /**
-     * Remove element
+     * Remove content
      *
-     * @param \GameBundle\Entity\Element $element
+     * @param \GameBundle\Entity\Contents $content
      */
-    public function removeElement(\GameBundle\Entity\Element $element)
+    public function removeContent(\GameBundle\Entity\Contents $content)
     {
-        $this->element->removeElement($element);
+        $this->contents->removeElement($content);
     }
 
     /**
-     * Get element
+     * Get contents
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getElement()
+    public function getContents()
     {
-        return $this->element;
+        return $this->contents;
     }
 
     /**

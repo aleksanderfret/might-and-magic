@@ -27,20 +27,10 @@ class Author implements UserAuthorInterface
     protected $id;
     
     /**
-     *  @ORM\Column(type="string", length=255, nullable=true)
+     *  @ORM\Column(type="string", length=255, nullable=false, unique=true)
      */
     protected $nick;
     
-    /**
-     *  @ORM\Column(name="`name`", type="string", length=50, nullable=true)
-     */
-    protected $name;
-    
-    /**
-     *  @ORM\Column(type="string", length=100, nullable=true)
-     */
-    protected $surname;
-
     /**
      * @ORM\OneToMany(targetEntity="GameAuthorWork", mappedBy="author")
      */
@@ -89,54 +79,6 @@ class Author implements UserAuthorInterface
     public function getNick()
     {
         return $this->nick;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Author
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set surname
-     *
-     * @param string $surname
-     *
-     * @return Author
-     */
-    public function setSurname($surname)
-    {
-        $this->surname = $surname;
-
-        return $this;
-    }
-
-    /**
-     * Get surname
-     *
-     * @return string
-     */
-    public function getSurname()
-    {
-        return $this->surname;
     }
 
     /**

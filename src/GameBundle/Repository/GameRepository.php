@@ -83,4 +83,10 @@ class GameRepository extends EntityRepository
             return null;
         }
     }
+    
+    public function getAllGameData()
+    {
+        $query = r;
+    }
+    
 }
