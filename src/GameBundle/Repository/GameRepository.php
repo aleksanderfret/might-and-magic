@@ -6,14 +6,7 @@ use Doctrine\ORM\EntityRepository;
 
 class GameRepository extends EntityRepository
 {
-    public function getTitleCoverNoteRate()
-    {
-        return $this->getEntityManager()->createQuery(
-            'SELECT p FROM GameBundle:Game p ORDER BY p.id ASC'
-        )->getResult();
-    }
-    
-    public function getAverageGameRate(int $gameId)
+    public function calculateVotesAndAverageRate(int $gameId)
     {
         $query = $this->getEntityManager()->createQuery(
             "SELECT AVG(r.value) AS average, COUNT(r.value) AS votes FROM GameBundle:GameUserRate gur LEFT JOIN gur.rate r WHERE gur.game = :gid"
@@ -28,6 +21,7 @@ class GameRepository extends EntityRepository
             return null;
         }
     }
+    
     public function getUserGameRate(int $gameId, int $userId)
     {
         $query = $this->getEntityManager()->createQuery(
@@ -48,6 +42,7 @@ class GameRepository extends EntityRepository
             return null;
         }
     }
+    
     
     public function getRankingPosition()
     {
@@ -83,10 +78,4 @@ class GameRepository extends EntityRepository
             return null;
         }
     }
-    
-    public function getAllGameData()
-    {
-        $query = r;
-    }
-    
 }

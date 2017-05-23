@@ -29,7 +29,6 @@ class GameController extends Controller
      */
     public function listAction()
     {
-        //TODO @ParamConverter("game", class="GameBundle:Game", options={"repository_method" = "getTitleCoverNoteRate"})
         $games = $this->get('doctrine')->getRepository('GameBundle:Game')->findAll();
         return $this->render('GameBundle:Game:games.html.twig', ['game' => $games]);
     }
@@ -42,7 +41,6 @@ class GameController extends Controller
      */
     public function showAction(Request $request, Game $game)
     {
-        $averageGameRate = $this->get('doctrine')->getRepository('GameBundle:Game')->getAverageGameRate($game->getId());        
         $gamesRates = $this->get('doctrine')->getRepository('GameBundle:Game')->getGamesRatesforAuthorsOfComments($game->getId());
         $user = $this->getUser();
         if (!isset($user) || !is_object($user) || !$user instanceof UserInterface) {
@@ -51,7 +49,7 @@ class GameController extends Controller
             $userRate = $this->get('doctrine')->getRepository('GameBundle:Game')->getUserGameRate($game->getId(), $user->getId());
         }
         #dump($game);exit();
-        return $this->render('GameBundle:Game:game.html.twig', ['game' => $game, 'rate'=>$averageGameRate, 'userrate'=> $userRate, 'commentrate'=>$gamesRates]);
+        return $this->render('GameBundle:Game:game.html.twig', ['game' => $game, 'userrate'=> $userRate, 'commentrate'=>$gamesRates]);
     }
     
     /**
@@ -138,6 +136,12 @@ class GameController extends Controller
                        
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($dbRate);
+            $entityManager->flush();
+            
+            $votesAndAverageRate = $this->get('doctrine')->getRepository('GameBundle:Game')->calculateVotesAndAverageRate($game->getId());
+            $game->setAvg($votesAndAverageRate['avg']);
+            $game->setVotes($votesAndAverageRate['num']);
+            $entityManager->persist($game);
             $entityManager->flush();
             
             $event = new GenericEvent($dbRate);

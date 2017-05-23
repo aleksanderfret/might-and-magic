@@ -1,7 +1,7 @@
 <div>
     <p>
-        {% if rate.avg %}
-            {{'rate.average_rate'|trans}} {{rate.avg}}, {{'rate.num_rate'|transchoice(rate.num)}}    
+        {% if game.avg %}
+            {{'rate.average_rate'|trans}} {{game.avg}}, {{'rate.num_rate'|transchoice(game.votes)}}    
         {% else %}
            {{'rate.no_rate'|trans}}
         {% endif %}

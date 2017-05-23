@@ -106,14 +106,14 @@ class Game
     protected $gameUserRate;
     
     /**
-     *  @ORM\Column(type="float", nullable=true)
+     *  @ORM\Column(name="`avg`", type="decimal", nullable=true, precision=3, scale=1)
      */
-    protected $averageRate;
+    protected $avg;
     
     /**
-     *  @ORM\Column(type="integer", nullable=true)
+     *  @ORM\Column(name="`votes`", type="integer", nullable=true)
      */
-    protected $numberOfRates;
+    protected $votes;
     
     /**
      * @ORM\ManyToOne(targetEntity="Edition", inversedBy="game")
@@ -308,54 +308,6 @@ class Game
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    /**
-     * Set averageRate
-     *
-     * @param float $averageRate
-     *
-     * @return Game
-     */
-    public function setAverageRate($averageRate)
-    {
-        $this->averageRate = $averageRate;
-
-        return $this;
-    }
-
-    /**
-     * Get averageRate
-     *
-     * @return float
-     */
-    public function getAverageRate()
-    {
-        return $this->averageRate;
-    }
-
-    /**
-     * Set numberOfRates
-     *
-     * @param integer $numberOfRates
-     *
-     * @return Game
-     */
-    public function setNumberOfRates($numberOfRates)
-    {
-        $this->numberOfRates = $numberOfRates;
-
-        return $this;
-    }
-
-    /**
-     * Get numberOfRates
-     *
-     * @return integer
-     */
-    public function getNumberOfRates()
-    {
-        return $this->numberOfRates;
     }
 
     /**
@@ -642,5 +594,53 @@ class Game
     public function getCover()
     {
         return $this->cover;
+    }
+
+    /**
+     * Set avg
+     *
+     * @param float $avg
+     *
+     * @return Game
+     */
+    public function setAvg($avg)
+    {
+        $this->avg = $avg;
+
+        return $this;
+    }
+
+    /**
+     * Get avg
+     *
+     * @return float
+     */
+    public function getAvg()
+    {
+        return $this->avg;
+    }
+
+    /**
+     * Set votes
+     *
+     * @param integer $votes
+     *
+     * @return Game
+     */
+    public function setVotes($votes)
+    {
+        $this->votes = $votes;
+
+        return $this;
+    }
+
+    /**
+     * Get votes
+     *
+     * @return integer
+     */
+    public function getVotes()
+    {
+        return $this->votes;
     }
 }
