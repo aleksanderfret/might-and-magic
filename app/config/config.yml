@@ -24,6 +24,16 @@ framework:
     #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
+    assets: 
+        packages:
+            large:
+                base_path: /assets/image/large/
+            thumbnail:
+                base_path: /assets/image/thumbnail/
+            cover:
+                base_path: /assets/cover/
+            download:
+                base_path: /assets/download/
     default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~

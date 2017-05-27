@@ -7,14 +7,14 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(
- *      name="`element`",
+ *      name="`contents`",
  *      indexes={
  *          @ORM\Index(name="idx_element_type_id", columns={"type_id"}),
  *          @ORM\Index(name="idx_element_game_id", columns={"game_id"})
  *      }
  * )
  */
-class Element
+class Contents
 {
     /**
      * @ORM\Id
@@ -23,11 +23,6 @@ class Element
      */
     protected $id;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    protected $description;
-    
     /**
      *  @ORM\Column(type="integer")
      */
@@ -49,7 +44,7 @@ class Element
     protected $modDate;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Type", inversedBy="element")
+     * @ORM\ManyToOne(targetEntity="Type", inversedBy="contents")
      * @ORM\JoinColumn(
      *      name="type_id",
      *      referencedColumnName="id",
@@ -58,13 +53,13 @@ class Element
     protected $type;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Game", inversedBy="element")
+     * @ORM\ManyToOne(targetEntity="Game", inversedBy="contents")
      * @ORM\JoinColumn(
      *      name="game_id",
      *      referencedColumnName="id",
      *      nullable=false)
      */
-    protected $game;
+    protected $game;    
 
     /**
      * Get id
@@ -74,38 +69,14 @@ class Element
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Element
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
+    }    
 
     /**
      * Set amount
      *
      * @param integer $amount
      *
-     * @return Element
+     * @return Contents
      */
     public function setAmount($amount)
     {
@@ -129,7 +100,7 @@ class Element
      *
      * @param \DateTime $createDate
      *
-     * @return Element
+     * @return Contents
      */
     public function setCreateDate($createDate)
     {
@@ -153,7 +124,7 @@ class Element
      *
      * @param \DateTime $addDate
      *
-     * @return Element
+     * @return Contents
      */
     public function setAddDate($addDate)
     {
@@ -177,7 +148,7 @@ class Element
      *
      * @param \DateTime $modDate
      *
-     * @return Element
+     * @return Contents
      */
     public function setModDate($modDate)
     {
@@ -201,7 +172,7 @@ class Element
      *
      * @param \GameBundle\Entity\Type $type
      *
-     * @return Element
+     * @return Contents
      */
     public function setType(\GameBundle\Entity\Type $type)
     {
@@ -225,7 +196,7 @@ class Element
      *
      * @param \GameBundle\Entity\Game $game
      *
-     * @return Element
+     * @return Contents
      */
     public function setGame(\GameBundle\Entity\Game $game)
     {

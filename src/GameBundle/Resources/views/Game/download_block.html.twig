@@ -1,0 +1,21 @@
+{% if game.download == true %}
+    <div id="download">
+        <h4>{{ 'game.download'|trans }}</h4>
+        <div>
+            <ul>
+            {% for resource in game.download %}
+                <li>
+                    <a href="{{asset(resource.file, 'download')}}">
+                    {% if resource.type %}
+                        {{'game.resource_game'|trans}}
+                    {% else %}
+                        {{'game.resource_instruction'|trans}}
+                    {% endif %}
+                    </a>
+                    <span> | {{resource.size}} MB</span>
+                </li>  
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}

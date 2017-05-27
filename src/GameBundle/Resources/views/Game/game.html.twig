@@ -1,10 +1,10 @@
 {% extends 'GameBundle::base.html.twig' %}
 
 {% block content %}
-    <div id="game_header">
-        {% block game_header %}
-            <h2> {{ game.title }}</h2>
-            <h3>{% if game.expansion %}{{'game.expanpansion_game'|trans}}{% else %}{{'game.main_game'|trans}}{% endif %}</h3>    
+    
+    <div id="intro">    
+        {% block intro %}
+            {{ include('GameBundle::Game/intro_block.html.twig') }}
         {% endblock %}
     </div>    
         

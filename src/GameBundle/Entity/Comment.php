@@ -60,6 +60,16 @@ class Comment implements UserCommentInterface
      * @ORM\Column(name="publishedDate",type="datetime")
      */
     protected $publishedDate;
+    
+    /**
+     *  @ORM\Column(type="smallint", options={"default":0}, nullable=false)
+     */
+    protected $censored;
+    
+    /**
+     *  @ORM\Column(type="smallint", options={"default":1}, nullable=false)
+     */
+    protected $accepted;
         
     /**
      * @ORM\ManyToOne(targetEntity="GameBundle\Model\UserInterface", inversedBy="comment")
@@ -83,6 +93,7 @@ class Comment implements UserCommentInterface
     public function __construct()
     {
         $this->answer = new ArrayCollection();
+        $this->publishedDate = new \DateTime();
     }
 
     /**
@@ -285,5 +296,53 @@ class Comment implements UserCommentInterface
     public function removeAnswer(\GameBundle\Entity\Comment $answer)
     {
         $this->answer->removeElement($answer);
+    }
+
+    /**
+     * Set censored
+     *
+     * @param integer $censored
+     *
+     * @return Comment
+     */
+    public function setCensored($censored)
+    {
+        $this->censored = $censored;
+
+        return $this;
+    }
+
+    /**
+     * Get censored
+     *
+     * @return integer
+     */
+    public function getCensored()
+    {
+        return $this->censored;
+    }
+
+    /**
+     * Set accepted
+     *
+     * @param integer $accepted
+     *
+     * @return Comment
+     */
+    public function setAccepted($accepted)
+    {
+        $this->accepted = $accepted;
+
+        return $this;
+    }
+
+    /**
+     * Get accepted
+     *
+     * @return integer
+     */
+    public function getAccepted()
+    {
+        return $this->accepted;
     }
 }

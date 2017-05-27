@@ -1,11 +1,10 @@
 <div>
-    <p>
-        {% if rate.avg %}
-            {{'rate.average_rate'|trans}} {{rate.avg}}, {{'rate.num_rate'|transchoice(rate.num)}}    
-        {% else %}
-           {{'rate.no_rate'|trans}}
-        {% endif %}
-    </p>
+    {% if game.avg %}
+        <div>{{'rate.average_rate'|trans}} {{game.avg}}</div>
+        <div>#{{ranking}} TOP | {{'rate.num_rate'|transchoice(game.votes)}}</dvi>
+    {% else %}
+       {{'rate.no_rate'|trans}}
+    {% endif %}
 </div>
 <div>
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -13,7 +12,7 @@
             <p>{{'rate.user_rate'|trans}}: {{userrate}}</p>
             <p>{{ 'rate.user_change_rate'|trans }}</p>            
         {% else %}
-            {% if rate.avg %}
+            {% if game.avg %}
                 <p>{{ 'rate.title_add_rate'|trans }}</p>
             {% endif %}    
         {% endif %}

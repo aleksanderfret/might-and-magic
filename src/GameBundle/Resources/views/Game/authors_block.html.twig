@@ -1,0 +1,32 @@
+{% if game.gameauthorwork == true %}
+    <div id="authors">
+        <h4>{{ 'game.authors'|trans }}</h4>
+        <div>
+            <ul>
+                {% if authors.author == true %}
+                    <li>{{'game.work.author'|transchoice(authors.author|length)}}:</br>
+                        {% for author in authors.author%}
+                            {% if loop.last %}
+                                {{author}}.
+                            {% else %}
+                                {{author}},
+                            {% endif %}
+                        {% endfor %}
+                    </li>
+                {% endif %}
+                {% if authors.editor == true %}
+                    <li>
+                        {{'game.work.editor'|transchoice(authors.editor|length)}}:</br>
+                        {% for editor in authors.editor%}
+                           {% if loop.last %}
+                                {{editor}}.
+                            {% else %}
+                                {{editor}},
+                            {% endif %} 
+                        {% endfor %}
+                    </li>
+                {% endif %}                
+            </ul>    
+        </div>
+    <div>    
+{% endif %}

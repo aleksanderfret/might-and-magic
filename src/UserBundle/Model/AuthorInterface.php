@@ -8,15 +8,7 @@ interface AuthorInterface
     
     public function setNick($nick);
     
-    public function getNick();
-    
-    public function setName($name);
-    
-    public function getName();
-    
-    public function setSurname($surname);
-    
-    public function getSurname();
+    public function getNick();    
    
     public function addGameAuthorWork(\GameBundle\Entity\GameAuthorWork $gameAuthorWork);
     
@@ -24,7 +16,7 @@ interface AuthorInterface
     
     public function getGameAuthorWork();
     
-    public function setUser(\GameBundle\Entity\User $user = null);
+    public function setUser(\UserBundle\Entity\User $user = null);
     
     public function getUser();
 }

@@ -1,0 +1,14 @@
+{% if game.contents %}
+    <div id="contents">
+        <h4>{{ 'game.contents'|trans }}</h4>
+        <div>
+            <ul>
+            {% for content in game.contents %}
+                <li>
+                    {{content.type.type}} - {{content.amount}}
+                </li>  
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}

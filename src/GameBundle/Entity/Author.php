@@ -27,20 +27,10 @@ class Author implements UserAuthorInterface
     protected $id;
     
     /**
-     *  @ORM\Column(type="string", length=255, nullable=true)
+     *  @ORM\Column(type="string", length=255, nullable=false, unique=true)
      */
     protected $nick;
     
-    /**
-     *  @ORM\Column(name="`name`", type="string", length=50, nullable=true)
-     */
-    protected $name;
-    
-    /**
-     *  @ORM\Column(type="string", length=100, nullable=true)
-     */
-    protected $surname;
-
     /**
      * @ORM\OneToMany(targetEntity="GameAuthorWork", mappedBy="author")
      */
@@ -92,54 +82,6 @@ class Author implements UserAuthorInterface
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Author
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set surname
-     *
-     * @param string $surname
-     *
-     * @return Author
-     */
-    public function setSurname($surname)
-    {
-        $this->surname = $surname;
-
-        return $this;
-    }
-
-    /**
-     * Get surname
-     *
-     * @return string
-     */
-    public function getSurname()
-    {
-        return $this->surname;
-    }
-
-    /**
      * Add gameAuthorWork
      *
      * @param \GameBundle\Entity\GameAuthorWork $gameAuthorWork
@@ -176,11 +118,11 @@ class Author implements UserAuthorInterface
     /**
      * Set user
      *
-     * @param \GameBundle\Entity\User $user
+     * @param \UserBundle\Entity\User $user
      *
      * @return Author
      */
-    public function setUser(\GameBundle\Entity\User $user = null)
+    public function setUser(\UserBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
@@ -190,7 +132,7 @@ class Author implements UserAuthorInterface
     /**
      * Get user
      *
-     * @return \GameBundle\Entity\User
+     * @return \UserBundle\Entity\User
      */
     public function getUser()
     {

@@ -7,12 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(
- *      name="image",
+ *      name="download",
  *      indexes={
- *          @ORM\Index(
- *              name="idx_image_type_id",
- *              columns={"type_id"}
- *          ),
  *          @ORM\Index(
  *              name="idx_image_game_id",
  *              columns={"game_id"}
@@ -26,7 +22,7 @@ use Doctrine\ORM\Mapping as ORM;
  *      }
  * )
  */
-class Image
+class Download
 {
     /**
      * @ORM\Id
@@ -34,7 +30,7 @@ class Image
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
+    
     /**
      *  @ORM\Column(
      *      name="`file`",
@@ -46,15 +42,12 @@ class Image
     protected $file;
     
     /**
-     *  @ORM\Column(
-     *      type="text",
-     *      nullable=true
-     * )
+     *  @ORM\Column(type="integer", nullable=false)
      */
-    protected $description;
+    protected $size;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Game", inversedBy="image")
+     * @ORM\ManyToOne(targetEntity="Game", inversedBy="download")
      * @ORM\JoinColumn(
      *      name="game_id",
      *      referencedColumnName="id",
@@ -64,18 +57,10 @@ class Image
     protected $game;
     
     /**
-     * @ORM\ManyToOne(
-     *      targetEntity="Type",
-     *      inversedBy="image"
-     * )
-     * @ORM\JoinColumn(
-     *      name="type_id",
-     *      referencedColumnName="id",
-     *      nullable=false
-     * )
+     *  @ORM\Column(type="smallint", options={"default":1}, nullable=false)
      */
-    protected $type;
-    
+    protected $type;    
+
     /**
      * Get id
      *
@@ -91,7 +76,7 @@ class Image
      *
      * @param string $file
      *
-     * @return Image
+     * @return Download
      */
     public function setFile($file)
     {
@@ -111,51 +96,27 @@ class Image
     }
 
     /**
-     * Set description
+     * Set size
      *
-     * @param string $description
+     * @param float $size
      *
-     * @return Image
+     * @return Download
      */
-    public function setDescription($description)
+    public function setSize($size)
     {
-        $this->description = $description;
+        $this->size = $size;
 
         return $this;
     }
 
     /**
-     * Get description
+     * Get size
      *
-     * @return string
+     * @return float
      */
-    public function getDescription()
+    public function getSize()
     {
-        return $this->description;
-    }
-
-    /**
-     * Set type
-     *
-     * @param \GameBundle\Entity\Type $type
-     *
-     * @return Image
-     */
-    public function setType(\GameBundle\Entity\Type $type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return \GameBundle\Entity\Type
-     */
-    public function getType()
-    {
-        return $this->type;
+        return $this->size;
     }
 
     /**
@@ -163,7 +124,7 @@ class Image
      *
      * @param \GameBundle\Entity\Game $game
      *
-     * @return Image
+     * @return Download
      */
     public function setGame(\GameBundle\Entity\Game $game)
     {
@@ -180,5 +141,29 @@ class Image
     public function getGame()
     {
         return $this->game;
+    }    
+
+    /**
+     * Set type
+     *
+     * @param integer $type
+     *
+     * @return Download
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return integer
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

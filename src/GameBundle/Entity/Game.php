@@ -35,11 +35,6 @@ class Game
     protected $description;
     
     /**
-     *  @ORM\Column(type="text", nullable=true)
-     */
-    protected $note;
-    
-    /**
      *  @ORM\Column(type="datetime")
      */
     protected $createDate;
@@ -55,24 +50,40 @@ class Game
     protected $modDate;
     
     /**
-     *  @ORM\Column(type="string", length=255)
+     * @ORM\OneToMany(targetEntity="Download", mappedBy="game")
      */
     protected $download;
     
     /**
-     *  @ORM\Column(name="slug", type="string", length=128, unique=true, nullable=false)
+     *  @ORM\Column(name="slug",
+     *      type="string",
+     *      length=128,
+     *      unique=true,
+     *      nullable=false
+     *  )
      */
     protected $slug;
-
-    /**
-     *  @ORM\ManyToMany(targetEntity="Image", mappedBy="game")
-     */
-    protected $image;
     
     /**
-     * @ORM\OneToMany(targetEntity="Element", mappedBy="game")
+     *  @ORM\Column(
+     *      name="`cover`",
+     *      type="string",
+     *      unique=true,
+     *      nullable=false,
+     *      length=255
+     * )
      */
-    protected $element;
+    protected $cover;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="game")
+     */
+    protected $image;    
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Contents", mappedBy="game")
+     */
+    protected $contents;
     
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="game")
@@ -95,6 +106,16 @@ class Game
     protected $gameUserRate;
     
     /**
+     *  @ORM\Column(name="`avg`", type="decimal", nullable=true, precision=3, scale=1)
+     */
+    protected $avg;
+    
+    /**
+     *  @ORM\Column(name="`votes`", type="integer", nullable=true)
+     */
+    protected $votes;
+    
+    /**
      * @ORM\ManyToOne(targetEntity="Edition", inversedBy="game")
      * @ORM\JoinColumn(name="edition_id", referencedColumnName="id", nullable=false)
      */
@@ -102,13 +123,14 @@ class Game
     
     public function __construct()
     {
+        $this->download = new ArrayCollection();
         $this->image = new ArrayCollection();
-        $this->element = new ArrayCollection();
+        $this->contents = new ArrayCollection();
         $this->comment = new ArrayCollection();
         $this->gameAuthorWork = new ArrayCollection();
         $this->gameUserNews = new ArrayCollection();
         $this->gameUserRate = new ArrayCollection();
-    }
+    }    
 
     /**
      * Get id
@@ -121,27 +143,51 @@ class Game
     }
 
     /**
-     * Set gameTitle
+     * Set title
      *
-     * @param string $gameTitle
+     * @param string $title
      *
      * @return Game
      */
-    public function setGameTitle($gameTitle)
+    public function setTitle($title)
     {
-        $this->gameTitle = $gameTitle;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get gameTitle
+     * Get title
      *
      * @return string
      */
-    public function getGameTitle()
+    public function getTitle()
     {
-        return $this->gameTitle;
+        return $this->title;
+    }
+
+    /**
+     * Set expansion
+     *
+     * @param integer $expansion
+     *
+     * @return Game
+     */
+    public function setExpansion($expansion)
+    {
+        $this->expansion = $expansion;
+
+        return $this;
+    }
+
+    /**
+     * Get expansion
+     *
+     * @return integer
+     */
+    public function getExpansion()
+    {
+        return $this->expansion;
     }
 
     /**
@@ -166,30 +212,6 @@ class Game
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Set note
-     *
-     * @param string $note
-     *
-     * @return Game
-     */
-    public function setNote($note)
-    {
-        $this->note = $note;
-
-        return $this;
-    }
-
-    /**
-     * Get note
-     *
-     * @return string
-     */
-    public function getNote()
-    {
-        return $this->note;
     }
 
     /**
@@ -265,23 +287,57 @@ class Game
     }
 
     /**
-     * Set download
+     * Set slug
      *
-     * @param string $download
+     * @param string $slug
      *
      * @return Game
      */
-    public function setDownload($download)
+    public function setSlug($slug)
     {
-        $this->download = $download;
+        $this->slug = $slug;
 
         return $this;
     }
 
     /**
-     * Get download
+     * Get slug
      *
      * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Add download
+     *
+     * @param \GameBundle\Entity\Download $download
+     *
+     * @return Game
+     */
+    public function addDownload(\GameBundle\Entity\Download $download)
+    {
+        $this->download[] = $download;
+
+        return $this;
+    }
+
+    /**
+     * Remove download
+     *
+     * @param \GameBundle\Entity\Download $download
+     */
+    public function removeDownload(\GameBundle\Entity\Download $download)
+    {
+        $this->download->removeElement($download);
+    }
+
+    /**
+     * Get download
+     *
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getDownload()
     {
@@ -323,37 +379,37 @@ class Game
     }
 
     /**
-     * Add element
+     * Add content
      *
-     * @param \GameBundle\Entity\Element $element
+     * @param \GameBundle\Entity\Contents $content
      *
      * @return Game
      */
-    public function addElement(\GameBundle\Entity\Element $element)
+    public function addContent(\GameBundle\Entity\Contents $content)
     {
-        $this->element[] = $element;
+        $this->contents[] = $content;
 
         return $this;
     }
 
     /**
-     * Remove element
+     * Remove content
      *
-     * @param \GameBundle\Entity\Element $element
+     * @param \GameBundle\Entity\Contents $content
      */
-    public function removeElement(\GameBundle\Entity\Element $element)
+    public function removeContent(\GameBundle\Entity\Contents $content)
     {
-        $this->element->removeElement($element);
+        $this->contents->removeElement($content);
     }
 
     /**
-     * Get element
+     * Get contents
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getElement()
+    public function getContents()
     {
-        return $this->element;
+        return $this->contents;
     }
 
     /**
@@ -517,74 +573,74 @@ class Game
     }
 
     /**
-     * Set title
+     * Set cover
      *
-     * @param string $title
+     * @param string $cover
      *
      * @return Game
      */
-    public function setTitle($title)
+    public function setCover($cover)
     {
-        $this->title = $title;
+        $this->cover = $cover;
 
         return $this;
     }
 
     /**
-     * Get title
+     * Get cover
      *
      * @return string
      */
-    public function getTitle()
+    public function getCover()
     {
-        return $this->title;
+        return $this->cover;
     }
 
     /**
-     * Set expansion
+     * Set avg
      *
-     * @param integer $expansion
+     * @param float $avg
      *
      * @return Game
      */
-    public function setExpansion($expansion)
+    public function setAvg($avg)
     {
-        $this->expansion = $expansion;
+        $this->avg = $avg;
 
         return $this;
     }
 
     /**
-     * Get expansion
+     * Get avg
+     *
+     * @return float
+     */
+    public function getAvg()
+    {
+        return $this->avg;
+    }
+
+    /**
+     * Set votes
+     *
+     * @param integer $votes
+     *
+     * @return Game
+     */
+    public function setVotes($votes)
+    {
+        $this->votes = $votes;
+
+        return $this;
+    }
+
+    /**
+     * Get votes
      *
      * @return integer
      */
-    public function getExpansion()
+    public function getVotes()
     {
-        return $this->expansion;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     *
-     * @return Game
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
+        return $this->votes;
     }
 }

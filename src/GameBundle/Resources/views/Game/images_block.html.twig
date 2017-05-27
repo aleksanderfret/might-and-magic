@@ -1,0 +1,13 @@
+{% if game.image == true %}
+    <div id="images">
+        <h4>{{ 'game.images'|trans }}</h4>
+        <div>
+            {% for image in game.image|sort %}
+                <figure>
+                    <a href="{{asset(image.file, 'large')}}"><img src="{{ asset(image.file, 'thumbnail') }}" alt="" title=""/></a>
+                    <figcaption>{{image.description}}</figcaption>
+                </figure>
+            {% endfor %}
+        </div>
+    <div>    
+{% endif %}
