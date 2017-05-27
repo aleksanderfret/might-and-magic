@@ -16,7 +16,7 @@ interface AuthorInterface
     
     public function getGameAuthorWork();
     
-    public function setUser(\GameBundle\Entity\User $user = null);
+    public function setUser(\UserBundle\Entity\User $user = null);
     
     public function getUser();
 }

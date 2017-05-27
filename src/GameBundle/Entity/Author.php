@@ -118,11 +118,11 @@ class Author implements UserAuthorInterface
     /**
      * Set user
      *
-     * @param \GameBundle\Entity\User $user
+     * @param \UserBundle\Entity\User $user
      *
      * @return Author
      */
-    public function setUser(\GameBundle\Entity\User $user = null)
+    public function setUser(\UserBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
@@ -132,7 +132,7 @@ class Author implements UserAuthorInterface
     /**
      * Get user
      *
-     * @return \GameBundle\Entity\User
+     * @return \UserBundle\Entity\User
      */
     public function getUser()
     {

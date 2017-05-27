@@ -9,8 +9,11 @@
     {% block contents %}
         {{ include('GameBundle::Game/contents_block.html.twig') }}
     {% endblock %}
+    
+    {% block authors %}
+        {{ include('GameBundle::Game/authors_block.html.twig') }}
+    {% endblock %}
 
     {% block download %}
         {{ include('GameBundle::Game/download_block.html.twig') }}
     {% endblock %}
-      

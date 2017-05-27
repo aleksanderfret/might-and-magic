@@ -34,6 +34,8 @@ game.edition: Edycja gry
 game.resource_game: gra
 game.resource_instruction: instrukcja
 game.images: Galeria
-game.authors: Autorzy
+game.authors: Twórcy gry
 game.contents: Wyposażenie
 game.download: Pobierz
+game.work.author: Autor gry|Autorzy gry
+game.work.editor: Autor modyfikacji, korekt, plansz, kart, poszukiwaczy, ilustracji, pomysłów, itp.|Autorzy modyfikacji, korekt, plansz, kart, poszukiwaczy, ilustracji, pomysłów, itp.
