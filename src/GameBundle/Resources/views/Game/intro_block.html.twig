@@ -1,4 +1,4 @@
-<h2> {{ game.title }}</h2>
+<h2>{{ game.title }}</h2>
 <h3>{% if game.expansion %}{{'game.expanpansion_game'|trans}}{% else %}{{'game.main_game'|trans}}{% endif %}</h3>
 <figure>
     <a href="{{asset(game.cover, 'large')}}"><img src="{{ asset(game.cover, 'thumbnail') }}" alt="" title=""/></a>

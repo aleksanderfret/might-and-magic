@@ -2,12 +2,12 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Magia i Miecz{% endblock %}</title>
+        <title>{{'site.title'|trans}}: {% block title %}{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        <div>{% block siteTitle %}<h1>Magia i Miecz - kOLOs edition</h1>{% endblock %}</div>
+        <div>{% block siteTitle %}<h1>{{'site.title'|trans}}</h1>{% endblock %}</div>
         <div id="user">
             {% block userPanel %}
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}

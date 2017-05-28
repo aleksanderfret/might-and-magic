@@ -1,5 +1,9 @@
-{% extends 'GameBundle::base.html.twig' %}
-
+{% extends 'AppBundle::base.html.twig' %}
+{% block title %}
+    {% if game.title == true %}
+    {{ game.title}}
+    {% endif %}
+{% endblock %}
 {% block content %}
     
     <div id="intro">    
