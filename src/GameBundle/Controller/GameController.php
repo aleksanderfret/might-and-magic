@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use FOS\UserBundle\Model\UserInterface;
 
+
 class GameController extends Controller
 {
     /**

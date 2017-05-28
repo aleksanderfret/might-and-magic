@@ -103,8 +103,12 @@ fos_user:
         confirmation:
             enabled: false
         form:
-            type: UserBundle\Form\RegistrationType
+            type: UserBundle\Form\RegistrationFormType
             validation_groups: [mimRegistration]
+    profile:
+        form: 
+            type: UserBundle\Form\ProfileFormType
+            validation_groups: [mimProfile]
             
 # KnpMenuBundle Configuration
 knp_menu:

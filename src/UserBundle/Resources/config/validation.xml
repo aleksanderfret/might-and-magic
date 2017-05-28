@@ -25,7 +25,7 @@
                 </option>
             </constraint>
             <constraint name="Regex">
-                <option name="pattern">/^[0-9a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ]+$/</option>
+                <option name="pattern">/^[0-9a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ_]+$/</option>
                 <option name="message">fos_user.username.mismatch</option>                
                 <option name="groups">
                     <value>mimRegistration</value>
