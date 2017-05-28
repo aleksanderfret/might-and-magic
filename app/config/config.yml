@@ -105,3 +105,10 @@ fos_user:
         form:
             type: UserBundle\Form\RegistrationType
             validation_groups: [mimRegistration]
+            
+# KnpMenuBundle Configuration
+knp_menu:
+    twig:
+        template: KnpMenuBundle::menu.html.twig
+    templating: false    
+    default_renderer: twig

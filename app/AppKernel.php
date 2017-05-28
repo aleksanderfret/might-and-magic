@@ -18,8 +18,9 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle(),
             new GameBundle\GameBundle(),
-            new FOS\UserBundle\FOSUserBundle(), 
-            new UserBundle\UserBundle(),                       
+            new FOS\UserBundle\FOSUserBundle(),
+            new UserBundle\UserBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

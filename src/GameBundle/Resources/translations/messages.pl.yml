@@ -40,5 +40,11 @@ game.images: Galeria
 game.authors: Twórcy gry
 game.contents: Wyposażenie
 game.download: Pobierz
-game.work.author: Autor gry|Autorzy gry
-game.work.editor: Autor modyfikacji, korekt, plansz, kart, poszukiwaczy, ilustracji, pomysłów, itp.|Autorzy modyfikacji, korekt, plansz, kart, poszukiwaczy, ilustracji, pomysłów, itp.
+game.work.author: '{1} Autor gry|[2, Inf[ Autorzy gry|Autorzy gry'
+game.work.editor: '{1} Autor modyfikacji, korekt, plansz, kart, poszukiwaczy, ilustracji, pomysłów, itp.|[2, Inf[ Autorzy modyfikacji, korekt, plansz, kart, poszukiwaczy, ilustracji, pomysłów, itp.'
+
+## INSTRUCTION
+instruction.title: Instrukcja
+
+## CONTACT
+contact.title: Kontakt
