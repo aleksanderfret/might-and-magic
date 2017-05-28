@@ -8,6 +8,7 @@
     </head>
     <body>
         <div>{% block siteTitle %}<h1>{{'site.title'|trans}}</h1>{% endblock %}</div>
+        <div id="menu">{{ knp_menu_render('AppBundle:Builder:mainMenu') }}</div>
         <div id="user">
             {% block userPanel %}
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}

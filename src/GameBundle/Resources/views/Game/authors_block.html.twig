@@ -2,31 +2,32 @@
     <div id="authors">
         <h4>{{ 'game.authors'|trans }}</h4>
         <div>
-            <ul>
+            <dl>
                 {% if authors.author == true %}
-                    <li>{{'game.work.author'|transchoice(authors.author|length)}}:</br>
-                        {% for author in authors.author%}
-                            {% if loop.last %}
-                                {{author}}.
-                            {% else %}
-                                {{author}},
-                            {% endif %}
-                        {% endfor %}
-                    </li>
+                    <dt>{{'game.work.author'|transchoice(authors.author|length)}}:</dt>
+                    {% for author in authors.author %}
+                    <dd>
+                        {% if loop.last %}
+                            {{author}}.
+                        {% else %}
+                            {{author}}, 
+                        {% endif %}
+                    </dd>
+                    {% endfor %}
                 {% endif %}
                 {% if authors.editor == true %}
-                    <li>
-                        {{'game.work.editor'|transchoice(authors.editor|length)}}:</br>
-                        {% for editor in authors.editor%}
-                           {% if loop.last %}
-                                {{editor}}.
-                            {% else %}
-                                {{editor}},
-                            {% endif %} 
-                        {% endfor %}
-                    </li>
+                    <dt>{{'game.work.editor'|transchoice(authors.editor|length)}}:</dt>
+                    {% for editor in authors.editor %}
+                    <dd>
+                        {% if loop.last %}
+                            {{editor}}.
+                        {% else %}
+                            {{editor}}, 
+                        {% endif %} 
+                    </dd>
+                    {% endfor %}                    
                 {% endif %}                
-            </ul>    
+            </dl>    
         </div>
     <div>    
 {% endif %}

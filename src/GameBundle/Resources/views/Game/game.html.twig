@@ -1,8 +1,5 @@
 {% extends 'AppBundle::base.html.twig' %}
-{% block title %}
-    {% if game.title == true %}
-    {{ game.title}}
-    {% endif %}
+{% block title %}{% if game.title == true %}{{ game.title}}{% endif %}
 {% endblock %}
 {% block content %}
     
