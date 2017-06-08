@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-    </head>
-    <body>        
+{% extends 'AppBundle::base.html.twig' %}
+    {% block userPanel %}
         {% if app.request.hasPreviousSession %}
             {% for type, messages in app.session.flashbag.all() %}
                 {% for message in messages %}
@@ -13,10 +9,10 @@
                 {% endfor %}
             {% endfor %}
         {% endif %}
-
         <div>
             {% block fos_user_content %}
             {% endblock fos_user_content %}
         </div>
-    </body>
-</html>
+    {% endblock %}
+
+

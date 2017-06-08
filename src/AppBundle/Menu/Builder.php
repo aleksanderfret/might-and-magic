@@ -31,7 +31,7 @@ class Builder implements ContainerAwareInterface
             ]); 
         }
         
-        $menu->addChild('instrukcja', ['route'=> 'show_instruction']);
+        $menu->addChild('instrukcja', ['route'=> 'show_table_of_contents']);
         $menu->addChild('kontakt',['route' => 'contact']);
         return $menu;
     }

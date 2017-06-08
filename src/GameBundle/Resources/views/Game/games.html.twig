@@ -3,9 +3,8 @@
 {% block content %}
     <h2>Gry:</h2>
     <ul>
-        {% for row in game %}
-            <li><a href="{{ path('show_game', {'slug': row.slug}) }}">{{ row.title }}</a>, edycja: {{row.edition.edition}}</li>
+        {% for game in games %}            
+            <a href="{{ path('show_game', {'slug': game.slug}) }}"><img src="{{ asset(game.cover, 'thumbnail') }}" alt="{{game.title}}" title="{{game.title}}"/></a>            
         {% endfor %}
     </ul>
-    <div><a href="{{ url('addGame') }}"> dodaj grę</a></div>
 {% endblock %}

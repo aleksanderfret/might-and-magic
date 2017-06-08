@@ -6,8 +6,8 @@ use GameBundle\Entity\Game;
 use UserBundle\Entity\User;
 use GameBundle\Entity\Comment;
 use GameBundle\Entity\GameUserRate;
-use GameBundle\Form\CommentType;
-use GameBundle\Form\RateType;
+use GameBundle\Form\CommentFormType;
+use GameBundle\Form\RateFormType;
 use GameBundle\Event\Events;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -31,7 +31,7 @@ class GameController extends Controller
     public function listAction()
     {
         $games = $this->get('doctrine')->getRepository('GameBundle:Game')->findAll();
-        return $this->render('GameBundle:Game:games.html.twig', ['game' => $games]);
+        return $this->render('GameBundle:Game:games.html.twig', ['games' => $games]);
     }
     
     /**
@@ -80,7 +80,7 @@ class GameController extends Controller
     {
         $commentResponse;
         
-        $form = $this->createCommentType();
+        $form = $this->createCommentFormType();
 
         $form->handleRequest($request);
         
@@ -116,7 +116,7 @@ class GameController extends Controller
      */
     public function commentFormAction(Game $game)
     {
-        $form = $this->createCommentType();
+        $form = $this->createCommentFormType();
         
         return $this->render('GameBundle:Game:comment_form.html.twig', [
             'game' => $game,
@@ -124,9 +124,9 @@ class GameController extends Controller
         ]);
     }
     
-    private function createCommentType()
+    private function createCommentFormType()
     {
-        return $this->createForm(CommentType::class);
+        return $this->createForm(CommentFormType::class);
     }
     
     /**
@@ -137,7 +137,7 @@ class GameController extends Controller
     public function rateNewAction(Request $request, Game $game)
     {
         $rateResponse;
-        $form = $this->createRateType();
+        $form = $this->createRateFormType();
 
         $form->handleRequest($request);
         
@@ -187,7 +187,7 @@ class GameController extends Controller
      */
     public function rateFormAction(Game $game)
     {
-        $form = $this->createRateType();
+        $form = $this->createRateFormType();
 
         return $this->render('GameBundle:Game:rate_form.html.twig', [
             'game' => $game,
@@ -195,9 +195,9 @@ class GameController extends Controller
         ]);
     }
     
-    private function createRateType()
+    private function createRateFormType()
     {
-        return $this->createForm(RateType::class);
+        return $this->createForm(RateFormType::class);
     }
     
     

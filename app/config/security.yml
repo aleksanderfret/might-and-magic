@@ -33,8 +33,9 @@ security:
     
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/profile$, role: IS_AUTHENTICATED_REMEMBERED }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: /edit, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /edit, role: IS_AUTHENTICATED_REMEMBERED}
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: /edition, role: ROLE_ADMIN }
