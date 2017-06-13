@@ -13,11 +13,11 @@ contact.email_mismatch: Podany e-mail jest nieprawidłowy.
 contact.subject_blank: Proszę napisać temat wiadomości.
 contact.subject_short: Podany temat jest za krótki.
 contact.subject_long: Podany temat jest za długi.
-contact.subject_mismatch: Temat może zawierać tylko litery, cyfry, spacje oraz znaki -:?;.()!_.
+contact.subject_mismatch: 'Temat może zawierać tylko litery, cyfry, spacje oraz znaki -:?;.()!_.'
 
 contact.message_blank: Proszę napisać wiadomość.
 contact.message_short: Podana wiadomość jest za krótka.
 contact.message_long: Podana wiadomość jest za długa.
-contact.message_mismatch: Wiadomość może zawierać tylko litery, cyfry, spacje oraz znaki -:?;.()!_.
+contact.message_mismatch: 'Wiadomość może zawierać tylko litery, cyfry, spacje oraz znaki -:?;.()!_.'
 
 contact.robot: Robotom nie wolno wysyłać wiadomości.

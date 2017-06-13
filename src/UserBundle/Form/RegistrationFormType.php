@@ -13,10 +13,10 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', TextType::class, [
-            'label' => 'Imię',
+            'label' => 'registratin.user.name',
             ]);
         $builder->add('surname', TextType::class, [
-            'label' => 'Nazwisko',
+            'label' => 'registration.user.surname',
             ]);
         $builder->add('avatar', EntityType::class, [
             'class' => 'UserBundle:Avatar',
@@ -25,7 +25,8 @@ class RegistrationFormType extends AbstractType
             },
             'choice_label' => 'name',
             'expanded' => false,
-            'multiple' => false
+            'multiple' => false,
+            'label' => 'registratioin.user.avatar'
             ]);
     }
     

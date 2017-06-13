@@ -10,7 +10,7 @@ rate.action_add_rate: Oceń grę
 rate.error_add_rate: Podczas dodawania Twojej oceny wystąpił błąd.
 rate.average_rate: Ocena
 rate.no_rate: Bądź pierwszą osobą, która oceni.
-rate.num_rate: %count% głos|%count% głosy|%count% głosów
+rate.num_rate: '%count% głos|%count% głosy|%count% głosów'
 rate.user_rate: Twoja ocena
 rate.ranking_place: Miejsce w rankingu
 
@@ -25,7 +25,7 @@ comment.author_game_rate: Ocenił(a) tę grę na
 comment.author_no_rate: Nie Ocenił(a) jeszcze tej gry.
 commnet.commented_on: skomentował
 comment.no_comments: Bądź pierwszą osobą, która skomentuje.
-comment.num_comments: %count% komentarz|%count% komentarze|%count% komentarzy
+comment.num_comments: '%count% komentarz|%count% komentarze|%count% komentarzy'
 
 ## GAME
 game.expanpansion_game: Rozszerzenie gry

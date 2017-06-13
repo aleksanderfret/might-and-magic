@@ -118,3 +118,14 @@ knp_menu:
         template: KnpMenuBundle::menu.html.twig
     templating: false    
     default_renderer: twig
+
+# EWZRecaptchaBundle Configuration    
+ewz_recaptcha:
+    public_key: 6Le3aNoSAAAAAMzqxmNnD6CnzKgbhenePFEdDZ8I
+    private_key: 6Le3aNoSAAAAACST0eVcsyGNgc1dqoRADthcwTSD
+    # Not needed as "%kernel.default_locale%" is the default value for the locale key
+    locale_key:  "%kernel.default_locale%"
+    #locale_from_request: true
+    enabled: true
+    ajax: false
+    #verify_host: true

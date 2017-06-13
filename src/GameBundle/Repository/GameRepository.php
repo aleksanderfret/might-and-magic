@@ -117,7 +117,7 @@ class GameRepository extends EntityRepository
         $query->setParameter('gid', $gameId);
         $i = 0;
         $j = 0;
-        $authors = ['author' => [], 'editor' => [], 'otsher' => []];
+        $authors = ['author' => [], 'editor' => [], 'other' => []];
         try {
             $resultArray = $query->getResult();
             foreach ($resultArray as $key => $value) {

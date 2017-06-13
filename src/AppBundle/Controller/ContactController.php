@@ -20,12 +20,14 @@ use AppBundle\Form\ContactFormType;
  */
 class ContactController extends Controller
 {
+    
     /**
      * @Route("/kontakt/sendMail", name="send_message")
      * @Method("POST")
      */
     public function contactAction(Request $request)
-    {
+    {   
+        
         $contactResponse;
         
         $form = $this->createContactForm();
@@ -35,22 +37,8 @@ class ContactController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             
-            $session = $request->getSession();
-            
-//            $message = \Swift_Message::newInstance()
-//                ->setSubject($data['subject'])
-//                ->setTo(['kontakt@gramagiaimiecz.fret.com.pl' => 'kOLOs'])
-//                ->setFrom([$data['email'] => $data['name']])
-//                ->setSender([$data['email'] => $data['name']])
-//                ->setReplyTo([$data['email']])
-//                ->setBody($this->renderView('AppBundle:Contact:contact_message.html.twig',['name' => $data['name'], 'message' => $data['message']]),'text/html');
-//            
-//            $result =$this->get('mailer')->send($message);
-//            
-//            
-//            if(($data['sendtome'] == true)) {
-//                $message->setCc($data['email']);
-//            }
+            $session = $request->getSession();            
+
             $result = $this->sendEmail($session, $data, $data['sendtome']);                
                 
             if ($result == 0) {

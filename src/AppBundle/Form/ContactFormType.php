@@ -10,18 +10,20 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Constraints\IsFalse;
+use Symfony\Component\Validator\Constraints\EqualTo;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue as RecaptchaTrue;
 
 class ContactFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextareaType::class, [
+            ->add('name', TextType::class, [
                 'label' => 'contact.name_label',
                 'required' => true,
                 'constraints' => [
@@ -114,11 +116,19 @@ class ContactFormType extends AbstractType
                 'label'=> false,
                 'expanded' => true,
                 'multiple' => true,
-                'choices' => ['robot' => 1],
+                'choices' => ['contact.robot_label' => 1],
                 'constraints' => [
-                    new IsFalse([
+                    new EqualTo([
+                        'value' => [],
                         'message' => "contact.robot"
                         ])
+                    ]
+                ]
+            )
+            ->add('recaptcha', EWZRecaptchaType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new RecaptchaTrue()
                     ]
                 ]
             )

@@ -35,5 +35,5 @@ monolog:
 
 swiftmailer:
     transport: gmail
-    username:  alemikolo@gmail.com
-    password:  "@#$sMiOFb975"
+    username:  "alemikolo@gmail.com"
+    password:  "@#$sMiOFb97"
