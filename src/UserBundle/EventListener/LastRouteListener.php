@@ -46,6 +46,6 @@ class LastRouteListener
         $thisRoute = ['name' => $thisRouteName, 'params' => $thisRouteParams];
         $previousRoute = $session->get('this_route', []);
         $session->set('previous_route', $previousRoute);
-        $session->set('this_route', $thisRoute);        
+        $session->set('this_route', $thisRoute); 
     }
 }

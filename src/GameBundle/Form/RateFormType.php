@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class RateType extends AbstractType
+class RateFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

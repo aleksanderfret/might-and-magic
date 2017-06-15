@@ -19,6 +19,10 @@ profile:
     show:
         username: 'Nazwa użytkownika'
         email: E-mail
+        name: Imię
+        surname: Nazwisko
+        avatar: Avatar
+        register_date: 'Data rejestracji'
     edit:
         submit: 'Edytuj użytkownika'
     flash:
@@ -37,19 +41,19 @@ registration:
     email:
         subject: 'Witaj %username%!'
         message: |
-            Cześć %username%!
+            'Cześć %username%!
 
             Aby potwierdzić swoje konto - proszę przejść do %confirmationUrl%
 
             Pozdrawiamy,
-            Zespół.
+            Zespół.'
 
 resetting:
     check_email: |
-        E-mail został wysłany. Zawiera on link do formularza zmiany hasła.
+        'E-mail został wysłany. Zawiera on link do formularza zmiany hasła.
         Uwaga: Możesz zresetować hasło tylko jeden raz w ciągu %tokenLifetime% godzin.
 
-        Sprawdź swoją skrzynkę pocztową, jeśli jednak nie widzisz wiadomości od nas, sprawdź folder spam lub spróbuj ponownie później.
+        Sprawdź swoją skrzynkę pocztową, jeśli jednak nie widzisz wiadomości od nas, sprawdź folder spam lub spróbuj ponownie później.'
 
     request:
         username: 'Wpisz nazwęa użytkownika lub e-mail'
@@ -61,12 +65,12 @@ resetting:
     email:
         subject: 'Resetowanie hasła'
         message: |
-            Cześć %username%!
+            'Cześć %username%!
 
             Aby zresetować hasło - proszę przejść do %confirmationUrl%
 
             Pozdrawiamy,
-            Zespół.
+            Zespół.'
 
 layout:
     logout: Wyloguj
@@ -74,6 +78,8 @@ layout:
     register: Zarejestruj
     logged_in_as: 'Zalogowano jako %username%'
     logged_in_user: '%username%'
+    profile: Twój profil
+    edit: Edytuj profil
 form:
     group_name: 'Nazwa grupy'
     username: 'Nazwa użytkownika'

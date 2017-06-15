@@ -7,7 +7,7 @@ namespace UserBundle\Form;
  *
  * @author Olek
  */
-class AvatarType
+class AvatarFormType
 {
     //put your code here
 }

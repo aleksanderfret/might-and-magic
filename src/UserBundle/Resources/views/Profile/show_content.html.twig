@@ -3,4 +3,12 @@
 <div class="fos_user_user_show">
     <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
     <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+    <p>{{ 'profile.show.name'|trans }}: {{ user.name }}</p>
+    <p>{{ 'profile.show.surname'|trans }}: {{ user.surname }}</p>
+    <p>{{ 'profile.show.avatar'|trans }}: {{ user.avatar.file }}</p>
+    <p>{{ 'profile.show.register_date'|trans }}: {{ user.regDate|date("d.m.Y") }}</p>
+    <p>
+        <a href="{{ path('fos_user_profile_edit') }}">{{ 'layout.edit'|trans({}, 'FOSUserBundle') }}</a> | 
+        <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+    </p>
 </div>

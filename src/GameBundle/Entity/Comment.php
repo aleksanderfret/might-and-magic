@@ -43,8 +43,8 @@ class Comment implements UserCommentInterface
      *     maxMessage="comment.too_long"
      * )
      * @Assert\Regex(
-     *     pattern     = "/^[a-zA-ZęóąśłżźćńĘĄŚŁŻŹĆŃ0-9 !?,.:)(-_]+$/",
-     *     htmlPattern = "^[a-zA-ZęóąśłżźćńĘĄŚŁŻŹĆŃ0-9 !?,.:)(-_]+$",
+     *     pattern     = "/^[-:?; ,()!._a-zA-ZęóąśłżźćńĘĄŚŁŻŹĆŃ0-9]+$/",
+     *     htmlPattern = "^[a-zA-ZęóąśłżźćńĘĄŚŁŻŹĆŃ0-9]+$",
      *     message     = "comment.mismatch"
      * )
      */

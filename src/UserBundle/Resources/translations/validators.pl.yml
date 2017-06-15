@@ -4,7 +4,7 @@ fos_user:
         blank: 'Proszę podać nazwę użytkownika.'
         short: 'Nazwa użytkownika jest za krótka. Musi zawierać przynajmniej 3 znaki.'
         long: 'Nazwa użytkownika jest za długa. Może zwierać maksymalnie 50 znaków.'
-        mismatch: 'Nazwa użytkownika może zawierać tylko litery i cyfry. '
+        mismatch: 'Nazwa użytkownika może zawierać tylko litery, cyfry oraz znak podkreślnika. '
     email:
         already_used: 'Podany email jest zajęty.'
         blank: 'Proszę podać adres email.'

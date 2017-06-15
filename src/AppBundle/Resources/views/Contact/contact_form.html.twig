@@ -1,0 +1,11 @@
+    {{ form_start(form, { method: 'post', action: path('send_message') }) }}
+        <fieldset>
+            <legend>{{ 'contact.title_send_message'|trans }}</legend>
+
+            {# Render any global form error (e.g. when a constraint on a public getter method failed) #}
+            {{ form_errors(form) }}
+            <div
+                {{form_widget(form)}}
+            </div>
+            </fieldset>
+    {{ form_end(form) }}

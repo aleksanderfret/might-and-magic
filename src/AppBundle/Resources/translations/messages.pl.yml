@@ -1,0 +1,36 @@
+## MENU
+
+menu.start: start
+menu.games: gry
+menu.instruction: instrukcja
+menu.contact: kontakt
+menu.magia-i-miecz-edycja-kolosa: Magia i Miecz
+menu.magia-i-miecz-podziemia-edycja-kolosa: Podziemia
+menu.magia-i-miecz-w-kosmicznej-otchlani-edycja-kolosa: W Kosmicznej Otchłani   
+menu.magia-i-miecz-miasto-edycja-kolosa: Miasto
+menu.magia-i-miecz-jaskinia-edycja-kolosa: Jaskinia
+menu.magia-i-miecz-smoki-edycja-kolosa: Smoki
+menu.magia-i-miecz-mistrzowie-edycja-kolosa: Mistrzowie
+menu.magia-i-miecz-zapomniane-pustkowia-edycja-kolosa: Zapomniane Pustkowia
+menu.magia-i-miecz-wioska-edycja-kolosa: Wioska
+
+## CONTACT
+contact.title: Kontakt
+contact.title_send_message: Wyślij wiadomość
+contact.name_label: "Imię:"
+contact.email_label: "E-mail:"
+contact.subject_label: "Temat:"
+contact.message_label: "Wiadomość:"
+contact.sendtome_label: "Wyślij do mnie kopię tej wiadomości"
+contact.robot_label: "Robot"
+contact.action_send_message: "Wyślij"
+contact.error_sending_message: Formularz kontaktowy zawiera błędy.
+contact.success: Dziękuję za wysłanie wiadomości. Wszystko przebiegło pomyślnie.
+contact.success_copyless: Dziękuję za wysłanie wiadomości. Nie udało się wysłać kopii wiadomości.
+contact.failure: Podczas wysyłania wiadomości wystąpił błąd. Przepraszamy.
+contact.failure_message: "Treść wiadomości:"
+contact.message_invalid: Wiadomość jest niepoprawna.
+contact.sending_failure: Podczas wysyłania wiadomości wystąpił błąd.
+contact.sending_success: Wysłano wiadomość.
+contact.message_created: Utworzono wiadomość.
+Recaptcha: Recaptcha

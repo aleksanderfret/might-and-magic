@@ -12,7 +12,7 @@ services:
 #            - { name: 'monolog.logger', channel: 'security' }
 
     app.form.registration:
-        class: UserBundle\Form\RegistrationType
+        class: UserBundle\Form\RegistrationFormType
         tags:
             - { name: form.type, alias: app_user_registration }
 
@@ -20,6 +20,11 @@ services:
         class: UserBundle\EventListener\UserRegisterDateListener
         tags:
             - { name: kernel.event_subscriber }
+            
+    app.form.profile:
+        class: UserBundle\Form\ProfileFormType
+        tags:
+            - { name: form.type, alias: app_user_profile }
     
     user.last_route_event_listener:
         class: UserBundle\EventListener\LastRouteListener
