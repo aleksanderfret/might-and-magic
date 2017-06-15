@@ -61,8 +61,7 @@ class GameController extends Controller
         
         $authors = $this->get('doctrine')->
             getRepository('GameBundle:Game')->
-            getAuthors($game->getId());
-        dump($authors);
+            getAuthors($game->getId());        
         return $this->render('GameBundle:Game:game.html.twig',
             ['game' => $game,
              'userrate'=> $userRate,
